@@ -1,0 +1,13 @@
+O jogo deve ser executado no sistema operacional Windows 10, no compilador Visual Studio 2019, 
+com a biblioteca gráfica SFML 2.5.1 versão para Windows e Visual C++ 15 (2017) - 32-bit.
+Link para download da biblioteca: https://www.sfml-dev.org/download/sfml/2.5.1/
+Selecionar a versão correspondente no site indicado.
+
+Para que o jogo execute adequadamente, são necessárias as seguintes alterações no compilador:
+1. Na aba Projeto->Propriedades de <<NomeDoProjeto>>, no subtópico "Geral" do tópico "C/C++",
+adicionar no item "Diretórios de Inclusão Adicionais" o endereço da pasta "include" contida na pasta SFML 2.5.1.
+2. No mesmo local,  porém no subtópico "Diretórios de Biblioteca Adicionais" do tópico "Vinculador", 
+adicionar o endereço da pasta "lib" contida na mesma pasta SFML 2.5.1.
+3. No subtópico "Entrada" do tópico Vinculador, adicionar 
+"sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;"
+4. Aplicar configurações.
