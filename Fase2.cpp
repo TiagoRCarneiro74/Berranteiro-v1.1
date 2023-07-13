@@ -26,6 +26,7 @@ Fase2::Fase2() : Fase() {
     mapa2 = mapa;
     cout << "O mapa foi criado.\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     j1 = new Jogador(1);
+    interface->setJogador(j1);
     j1->setMapa2(mapa2);
     j1->setPos(4320, 800);
 
@@ -89,6 +90,8 @@ void Fase2::executar()
         pGraf->limpaJanela();
         mapa2->imprimir();
         lista->desenhaLista();
+        interface->atualiza();
+        interface->imprimir();
         pGraf->mostraElementos();
     }
     std::cout << "O loop de execucao da fase terminou.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";

@@ -158,6 +158,7 @@
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="ListaEntes.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="GerenciadorGrafico.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Inimigo.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Lista.h" />

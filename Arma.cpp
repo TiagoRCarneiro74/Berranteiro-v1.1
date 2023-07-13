@@ -31,6 +31,7 @@ Arma::Arma(string n) {
 		hitscan = 1;
 		mag = 30;
 		magvar = 30;
+		ammo = 180;
 		Tesq.loadFromFile("Midia/Imagens/Skorpion-E.png");
 		Tdir.loadFromFile("Midia/Imagens/Skorpion-D.png");
 		Aesq.loadFromFile("Midia/Imagens/Skorpion-AE.png");
@@ -46,6 +47,7 @@ Arma::Arma(string n) {
 		hitscan = 1;
 		mag = 12;
 		magvar = 12;
+		ammo = 240;
 		Tesq.loadFromFile("Midia/Imagens/Pistola-E.png");
 		Tdir.loadFromFile("Midia/Imagens/Pistola-D.png");
 		Aesq.loadFromFile("Midia/Imagens/Pistola-AE.png");
@@ -71,9 +73,9 @@ sf::Texture* Arma::getAdir() { return &Adir; }
 sf::Texture* Arma::getAesq() { return &Aesq; }
 
 void Arma::recarregar() {
-	r0.play();
-	tr = clock();
-	recarregando = 1;
-	//dry = 0;
-	//magvar = mag;
+	if (ammo > 0) {
+		r0.play();
+		tr = clock();
+		recarregando = 1;
+	}
 }

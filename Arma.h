@@ -10,7 +10,7 @@ protected:
 	clock_t t0, tr;
 	//sf::Sprite *Sesq, *Sdir;
 	sf::Texture Tesq, Tdir, Adir, Aesq;
-	float dano, cad, rec, alc, mag, magvar;
+	float dano, cad, rec, alc, mag, magvar, ammo;
 	sf::SoundBuffer* s, *e, *d, *r;
 	sf::Sound r0;
 	string nome;
@@ -46,4 +46,9 @@ public:
 	clock_t getTR() { return tr; };
 	bool getRecarregando() { return recarregando; };
 	void setRecarregando(int x) { recarregando = x; };
+	void setAmmo(float x) { 
+		ammo = x; 
+		if (ammo <= 0) dry = 1;
+	};
+	float getAmmo() { return ammo; };
 };

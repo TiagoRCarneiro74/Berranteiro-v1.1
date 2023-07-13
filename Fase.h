@@ -12,6 +12,7 @@
 #include "Trepadeira.h"
 #include "Curupira.h"
 #include "Obstaculo.h"
+#include "Interface.h"
 using namespace Entidades;
 using namespace Personagens;
 using namespace Gerenciadores;
@@ -31,6 +32,7 @@ namespace Fases
             Jogador* j1;
             Jogador* j2;
             Mapa* mapa2;
+            Interface* interface;
             //Lista<Obstaculo>* obs;
 
         public:

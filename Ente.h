@@ -21,7 +21,7 @@ class Ente
         Ente(sf::Vector2f xy);
         ~Ente();
         //virtual void executar() = 0;
-        void imprimir();
+        virtual void imprimir();
         sf::Vector2f getPos();
         sf::Sprite getCorpo();
         sf::Texture getTextura() { return textura; }

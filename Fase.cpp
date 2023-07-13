@@ -10,6 +10,7 @@ Fase::Fase() {
     j1 = NULL;
     j2 = NULL;
     mapa2 = NULL;
+    interface = new Interface();
     //obs = NULL;
 }
 
@@ -22,6 +23,7 @@ Fase::Fase(GerenciadorColisao *c, GerenciadorGrafico *g, GerenciadorEvento *e)
     j1 = NULL;
     j2 = NULL;
     mapa2 = NULL;
+    interface = new Interface();
     //obs = NULL;
 }
 
@@ -33,6 +35,7 @@ Fase::~Fase()
     delete j1;
     delete inimigos;
     delete j2;
+    delete interface;
     pEvent = NULL;
     pGraf = NULL;
 }
@@ -40,6 +43,7 @@ Fase::~Fase()
 void Fase::setJogador1(Jogador *j)
 {
     j1 = j;
+    interface->setJogador(j);
 }
 void Fase::setJogador2(Jogador *j)
 {
@@ -116,6 +120,9 @@ void Fase::moveLista()
 
     pColi->executar();
     pEvent->executar();
+
+    //interface->atualiza();
+    //interface->imprimir();
 
     for(contador=1; contador<lista->getLista()->getTam() + 1; contador++)
 	{
