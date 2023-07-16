@@ -1,4 +1,5 @@
 #include "GerenciadorColisao.h"
+#include "Item.h"
 #include <cmath>
 
 using namespace Gerenciadores;
@@ -69,15 +70,19 @@ void GerenciadorColisao::executar() {
 					if (ds.x < 0.0f && ds.y < 0.0f) {
 						//std::cout << "Ocorre uma colisao 1.\n";
 						
-						if(ent2->getObstaculo()==false)
-							jogadores[i]->colisaoInimigo(ent2);
-
-						else
-						{
+						if (ent2->getObstaculo() == true) {
 							if(i==0)
 								flag1 = jogadores[i]->colisaoMapaObs(ent2);
 							else
 								flag2 = jogadores[i]->colisaoMapaObs(ent2);
+						}
+							
+
+						else if (ent2->getIsItem() == true) static_cast <Item*> (ent2)->pegar();
+
+						else
+						{
+							jogadores[i]->colisaoInimigo(ent2);
 						}
 					}
 					

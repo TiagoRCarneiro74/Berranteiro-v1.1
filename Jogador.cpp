@@ -32,8 +32,8 @@ Jogador::Jogador(const int j): Personagem(3, 101, 50, 50), jogador(j){
 	arma_sel = 1;
 	Arma* Pistola = new Arma("pistola");
 	l_arma->incluirEl(Pistola);
-	Arma* Skorpion = new Arma("skorpion");
-	l_arma->incluirEl(Skorpion);
+	//Arma* Skorpion = new Arma("skorpion");
+	//l_arma->incluirEl(Skorpion);
 }
 
 Jogador::~Jogador() {
@@ -172,7 +172,7 @@ void Jogador::colisaoInimigo(Entidade *i)
 	{
 		if(atacar==true)
 		{
-			i->setVidas(i->getVidas()-1);
+			i->setVidas(i->getVidas()-10);
 			if (i->getVivo() == false) pontos += 100;
 		}
 		else if(i->getAtacar()==true)
@@ -315,7 +315,7 @@ void Jogador::atirar() {
 			continue;
 		}
 		if (e != NULL) if (fabs(e->getPos().x - this->getPos().x) < min) {
-			min = e->getPos().x;
+			min = e->getPos().x - this->getPos().x;
 			e1 = e;
 		}
 		//std::cout << e->getPos().x << "\ne.y = " << e->getPos().y << "\nj.x = " << this->getPos().x << "\nj.y = " << this->getPos().y << "\n";

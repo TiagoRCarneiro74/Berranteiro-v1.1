@@ -32,7 +32,7 @@ namespace Fases
             Jogador* j1;
             Jogador* j2;
             Mapa* mapa2;
-            Interface* interface;
+            Interface* interf;
             //Lista<Obstaculo>* obs;
 
         public:
@@ -57,6 +57,7 @@ namespace Fases
             void geraArara(float x, float y);
             void geraPedra(float x, float y);
             void geraEspinho(float x, float y, int tam);
+            void geraItem(float x, float y, string nome);
             GerenciadorEvento* getEvent();
             void moveLista();
     };

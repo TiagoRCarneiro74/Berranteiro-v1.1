@@ -51,4 +51,16 @@ public:
 		if (ammo <= 0) dry = 1;
 	};
 	float getAmmo() { return ammo; };
+	void verifReload();
+	string getNome() { return nome; };
+	void setDano(float x) { dano = x; };
+	void setCad(float x) { cad = x; };
+	void setRec(float x) { rec = x; };
+	void setAlc(float x) { alc = x; };
+	void setMag(float x) { mag = x; };
+	void setNome(string s) { nome = s; };
+	void setTesq(string s) { Tesq.loadFromFile(s); };
+	void setAesq(string s) { Aesq.loadFromFile(s); };
+	void setTdir(string s) { Tdir.loadFromFile(s); };
+	void setAdir(string s) { Adir.loadFromFile(s); };
 };

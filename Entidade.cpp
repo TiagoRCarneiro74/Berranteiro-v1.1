@@ -14,6 +14,7 @@ Ente(xy)
 	vivo = true;
 	atacar = false;
 	obstaculo = false;
+	item = false;
 	numVidas = v;
 }
 

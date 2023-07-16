@@ -26,7 +26,7 @@ Fase2::Fase2() : Fase() {
     mapa2 = mapa;
     cout << "O mapa foi criado.\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     j1 = new Jogador(1);
-    interface->setJogador(j1);
+    interf->setJogador(j1);
     j1->setMapa2(mapa2);
     j1->setPos(4320, 800);
 
@@ -43,6 +43,7 @@ Fase2::Fase2() : Fase() {
     lista->add(static_cast<Entidade*>(j2));
     geraInimigos();
     geraObstaculos();
+    geraItens();
     /*Pedra* p1 = new Pedra(150, 150);
     lista->add(p1);
     inimigos->add(p1);
@@ -74,8 +75,8 @@ void Fase2::executar()
 
         moveLista();
 
-        if ((j1->getPos().x >= 12086 || j2->getPos().x >= 12086) && f1->getStatus() == sf::Music::Playing) {
-            f1->stop();
+        if ((j1->getPos().x >= 12086 || j2->getPos().x >= 12086) && f2->getStatus() != sf::Music::Playing) {
+            if (f1->getStatus() == sf::Music::Playing) f1->stop();
             f2->play();
         }
         //atual = j1->getMapa()->getincx();
@@ -90,8 +91,8 @@ void Fase2::executar()
         pGraf->limpaJanela();
         mapa2->imprimir();
         lista->desenhaLista();
-        interface->atualiza();
-        interface->imprimir();
+        interf->atualiza();
+        interf->imprimir();
         pGraf->mostraElementos();
     }
     std::cout << "O loop de execucao da fase terminou.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
@@ -203,6 +204,10 @@ Curupira* Fase2::geraCurupira(float x, float y)
     lista->add(static_cast<Entidade*>(inimigo));
 
     return inimigo;
+}
+
+void Fase2::geraItens() {
+    geraItem(4900, 900, "pistola");
 }
 
 sf::Music* Fase2::getMusica() { return f1; }

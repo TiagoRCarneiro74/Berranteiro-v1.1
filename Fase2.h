@@ -18,6 +18,7 @@ namespace Fases
         void executar();
         void geraInimigos();
         void geraObstaculos();
+        void geraItens();
         Curupira* geraCurupira(float x, float y);
         sf::Music* getMusica();
     };

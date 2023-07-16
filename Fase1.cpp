@@ -27,7 +27,7 @@ Fase1::Fase1(): Fase() {
 
     j1 = new Jogador(1);
     j1->setMapa2(mapa2);
-    interface->setJogador(j1);
+    interf->setJogador(j1);
 
     j2 = new Jogador(2);
     j2->setMapa2(mapa2);
@@ -40,6 +40,7 @@ Fase1::Fase1(): Fase() {
 
     geraInimigos();
     geraObstaculos();
+    geraItens();
 
     pEvent->setJogador1(j1);
     pEvent->setJogador2(j2);
@@ -80,10 +81,10 @@ void Fase1::executar()
         pGraf->limpaJanela();
 	    mapa2->imprimir();
 		lista->desenhaLista();
-        interface->atualiza();
-        interface->imprimir();
+        interf->atualiza();
+        interf->imprimir();
 		pGraf->mostraElementos();
-        interface->teste();
+        interf->teste();
         //interface->atualiza();
         //interface->imprimir();
     }
@@ -176,6 +177,10 @@ void Fase1::geraTrepadeira(float x, float y)
     Trepadeira* p1 = new Trepadeira(x, y);
     lista->add(p1);
     inimigos->add(p1);
+}
+
+void Fase1::geraItens() {
+    geraItem(2368, 300, "skorpion");
 }
 
 sf::Music* Fase1::getMusica() { return f1; }

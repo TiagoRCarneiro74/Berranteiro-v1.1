@@ -1,6 +1,10 @@
 #include "Fase.h"
+#include "Skorpion.h"
+#include "Pistola.h"
+using namespace Itens;
 
 using namespace Fases;
+
 
 Fase::Fase() {
     pColi = NULL;
@@ -10,7 +14,7 @@ Fase::Fase() {
     j1 = NULL;
     j2 = NULL;
     mapa2 = NULL;
-    interface = new Interface();
+    interf = new Interface();
     //obs = NULL;
 }
 
@@ -23,7 +27,7 @@ Fase::Fase(GerenciadorColisao *c, GerenciadorGrafico *g, GerenciadorEvento *e)
     j1 = NULL;
     j2 = NULL;
     mapa2 = NULL;
-    interface = new Interface();
+    interf = new Interface();
     //obs = NULL;
 }
 
@@ -35,7 +39,7 @@ Fase::~Fase()
     delete j1;
     delete inimigos;
     delete j2;
-    delete interface;
+    delete interf;
     pEvent = NULL;
     pGraf = NULL;
 }
@@ -43,7 +47,7 @@ Fase::~Fase()
 void Fase::setJogador1(Jogador *j)
 {
     j1 = j;
-    interface->setJogador(j);
+    interf->setJogador(j);
 }
 void Fase::setJogador2(Jogador *j)
 {
@@ -109,6 +113,14 @@ void Fase::geraEspinho(float x, float y, int tam)
     Espinho* e1 = new Espinho(x, y, tam);
     lista->add(static_cast<Entidade*>(e1));
     inimigos->add(static_cast<Entidade*>(e1));
+}
+
+void Fase::geraItem(float x, float y, string nome) {
+    Item* i=NULL;
+    if (nome == "skorpion") i = new Skorpion(j1, x, y);
+    else if (nome == "pistola") i = new Pistola(j1, x, y);
+    lista->add(static_cast <Entidade*> (i));
+    inimigos->add(static_cast <Entidade*> (i));
 }
 
 

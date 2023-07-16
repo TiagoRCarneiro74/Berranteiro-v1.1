@@ -11,6 +11,7 @@ namespace Entidades
 		bool vivo;
 		bool atacar;
 		bool obstaculo;
+		bool item;
 		int numVidas;
 
 	public:
@@ -31,6 +32,7 @@ namespace Entidades
 		void repos(float x, float y) { pos.x = pos.x + x; pos.y = pos.y + y; corpo.setPosition(pos.x, pos.y); }
 		void setVidas(int n);
 		bool getObstaculo();
+		bool getIsItem() { return item; }
 	};
 
 }

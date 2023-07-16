@@ -18,6 +18,7 @@ namespace Fases
             void geraInimigos();
             void geraObstaculos();
             void geraTrepadeira(float x, float y);
+            void geraItens();
             sf::Music* getMusica();
     };
 
