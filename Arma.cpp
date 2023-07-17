@@ -55,6 +55,22 @@ Arma::Arma(string n) {
 		s->loadFromFile("Midia/Musicas/Pistol.wav");
 		e->loadFromFile("Midia/Musicas/Load Gun.wav");
 	}
+	else if (nome == "mp5") {
+		cad = 18;
+		dano = 8;
+		rec = 1;
+		alc = 560;
+		hitscan = 1;
+		mag = 32;
+		magvar = 32;
+		ammo = 320;
+		Tesq.loadFromFile("Midia/Imagens/MP5-E.png");
+		Tdir.loadFromFile("Midia/Imagens/MP5-D.png");
+		Aesq.loadFromFile("Midia/Imagens/MP5-AE.png");
+		Adir.loadFromFile("Midia/Imagens/MP5-AD.png");
+		s->loadFromFile("Midia/Musicas/MP5.wav");
+		e->loadFromFile("Midia/Musicas/Load Gun.wav");
+	}
 }
 
 Arma::~Arma() {
@@ -78,4 +94,14 @@ void Arma::recarregar() {
 		tr = clock();
 		recarregando = 1;
 	}
+}
+
+void Arma::verifReload() {
+	clock_t at = clock();
+	if (at / (float)CLOCKS_PER_SEC - tr / (float)CLOCKS_PER_SEC >= rec && recarregando == 1) {
+		magvar = mag;
+		dry = 0;
+		recarregando = 0;
+	}
+	else if (recarregando == 1) dry = 1;
 }

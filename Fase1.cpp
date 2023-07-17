@@ -181,6 +181,10 @@ void Fase1::geraTrepadeira(float x, float y)
 
 void Fase1::geraItens() {
     geraItem(2368, 300, "skorpion");
+    geraItem(1000, 200, "med");
+    geraItem(1100, 200, "med");
+    geraItem(3300, 300, "med");
+    geraItem(4330, 820, "med");
 }
 
 sf::Music* Fase1::getMusica() { return f1; }

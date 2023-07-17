@@ -1,6 +1,8 @@
 #include "Fase.h"
 #include "Skorpion.h"
 #include "Pistola.h"
+#include "MP5.h"
+#include "MedPack.h"
 using namespace Itens;
 
 using namespace Fases;
@@ -119,6 +121,8 @@ void Fase::geraItem(float x, float y, string nome) {
     Item* i=NULL;
     if (nome == "skorpion") i = new Skorpion(j1, x, y);
     else if (nome == "pistola") i = new Pistola(j1, x, y);
+    else if (nome == "mp5") i = new MP5(j1, x, y);
+    else if (nome == "med") i = new Medpack(j1, x, y);
     lista->add(static_cast <Entidade*> (i));
     inimigos->add(static_cast <Entidade*> (i));
 }

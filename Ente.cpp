@@ -7,11 +7,12 @@ Ente::Ente(sf::Vector2f xy)
 {
     pos = xy;
     //textura = new sf::Texture;
-    if(!textura.loadFromFile("Midia/Imagens/Roxo.png")) std::cout << "Erro na abertura da textura roxa para o ente." << std::endl;
+    /*if(!textura.loadFromFile("Midia/Imagens/Roxo.png")) std::cout << "Erro na abertura da textura roxa para o ente." << std::endl;
     else {
         std::cout << "Foi criado um ente com a textura roxa." << std::endl;
         corpo.setTexture(textura);
-    }
+    }*/
+    corpo.setTexture(textura);
     //corpo.setTextureRect(sf::IntRect(0, 0, 288, 370));
     corpo.setPosition(sf::Vector2f(xy.x, xy.y));
 }

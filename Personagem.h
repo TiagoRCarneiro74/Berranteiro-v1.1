@@ -12,7 +12,7 @@ namespace Entidades
         class Personagem : public Entidade
         {
         protected:
-            int dano;
+            //int dano;
             bool virado;
 
         public:

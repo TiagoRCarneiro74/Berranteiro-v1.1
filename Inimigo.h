@@ -19,6 +19,7 @@ namespace Entidades
             bool ataqueDistancia;
             bool voa;
             sf::Clock relogio;
+            float dano;
 
         public:
             Inimigo(Jogador* j1, Jogador* j2, float x, float y);
@@ -28,6 +29,8 @@ namespace Entidades
             void movimentoAleatorio();
             virtual void ataque(sf::Vector2f posiJogador);
             void congela();
+            float getDano() { return dano; };
+            void setDano(float x) { dano = x; };
         };
 
     }

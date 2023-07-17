@@ -6,7 +6,7 @@ using namespace Personagens;
 Onca::Onca(Jogador* j1, Jogador* j2, float x, float y) :
 Inimigo(j1, j2, x, y)
 {
-    dano = 1;
+    dano = 25;
     numVidas = 50;
     agressividade = false;
     ataqueDistancia = false;

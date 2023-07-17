@@ -6,7 +6,7 @@ using namespace Personagens;
 Arara::Arara(Jogador* j1, Jogador* j2, float x, float y) :
 Inimigo(j1, j2, x, y)
 {
-    dano = 1;
+    dano = 15;
     numVidas = 30;
     aumentaVel = 0;
     ataqueDistancia = false;
@@ -47,7 +47,7 @@ void Arara::ataqueEsq()
 
 void Arara::ataque(sf::Vector2f posiJogador)
 {
-    int verif, v = 1.5;
+    int verif, v = 4;
 
     vel.x = 0.0;
 

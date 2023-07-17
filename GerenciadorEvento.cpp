@@ -48,7 +48,7 @@ void GerenciadorEvento::verifTeclaPressionada(sf::Keyboard::Key tecla)
 		}
 		if (tecla == sf::Keyboard::G) {
 			pJogador1->setAtacar(true);
-			if (pJogador1->getArmaSel() != 1) pJogador1->atirar();
+			if (pJogador1->getArmaSel() != 1) pJogador1->setAtirando(true);
 		}
 		if (tecla == sf::Keyboard::V) {
 			pJogador1->setArmaSel(pJogador1->getArmaSel() + 1);
@@ -104,6 +104,7 @@ void GerenciadorEvento::verifTeclaSolta(sf::Keyboard::Key tecla) {
 		if (tecla == sf::Keyboard::G)
 		{
 			pJogador1->setAtacar(false);
+			pJogador1->setAtirando(false);
 		}
 	}
 	if(pJogador2->getVivo()==true)

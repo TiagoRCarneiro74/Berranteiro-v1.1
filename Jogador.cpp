@@ -1,5 +1,6 @@
 #include "Jogador.h"
 #include "Inimigo.h"
+#include "Obstaculo.h"
 #include <windows.h>
 #include <iostream>
 #include <cmath>
@@ -9,9 +10,10 @@ using namespace Personagens;
 
 int Jogador::segueJogador = 1;
 
-Jogador::Jogador(const int j): Personagem(3, 101, 50, 50), jogador(j){
+Jogador::Jogador(const int j): Personagem(100, 101, 50, 50), jogador(j){
 	pMapa2 = NULL;
 	verifTempo = true;
+	maxVidas = 100;
 	pontos = 0;
 	l_arma = new Lista<Arma>();
 
@@ -32,8 +34,8 @@ Jogador::Jogador(const int j): Personagem(3, 101, 50, 50), jogador(j){
 	arma_sel = 1;
 	Arma* Pistola = new Arma("pistola");
 	l_arma->incluirEl(Pistola);
-	//Arma* Skorpion = new Arma("skorpion");
-	//l_arma->incluirEl(Skorpion);
+	Arma* Skorpion = new Arma("mp5");
+	l_arma->incluirEl(Skorpion);
 }
 
 Jogador::~Jogador() {
@@ -54,6 +56,8 @@ void Jogador::move()
 	corpo.setPosition(pos.x, pos.y);
 
 	verifImg();
+
+	if (atirando == 1) atirar();
 }
 
 void Jogador::atualizaPos() {
@@ -177,7 +181,7 @@ void Jogador::colisaoInimigo(Entidade *i)
 		}
 		else if(i->getAtacar()==true)
 		{
-			operator--();
+			numVidas -= static_cast <Inimigo*> (i)->getDano();
 			if(getVidas()==0)
 			{
 				if(jogador==1 && segueJogador==1)
@@ -236,7 +240,8 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 	
 	if(verifTempo==true && hbx->getAtacar()==true)
 	{
-		operator--();
+		//operator--();
+		numVidas -= static_cast <Obstaculo*> (hbx)->getDano();
 		verifTempo = false;
 	}
 

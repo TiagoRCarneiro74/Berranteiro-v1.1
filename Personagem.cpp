@@ -5,7 +5,7 @@ using namespace Personagens;
 
 Personagem::Personagem(const int v, const int id, float x, float y) : Entidade(v, sf::Vector2f(x, y), id)
 {
-    dano = 0;
+    //dano = 0;
     virado = 0;
 }
 

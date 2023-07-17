@@ -208,6 +208,7 @@ Curupira* Fase2::geraCurupira(float x, float y)
 
 void Fase2::geraItens() {
     geraItem(4900, 900, "pistola");
+    geraItem(9200, 768, "mp5");
 }
 
 sf::Music* Fase2::getMusica() { return f1; }

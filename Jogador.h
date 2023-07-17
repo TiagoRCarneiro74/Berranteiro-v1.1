@@ -14,7 +14,7 @@ namespace Entidades
 		private:
 			Mapa* pMapa2;
 			sf::Clock tempoDano;
-			bool verifTempo;
+			bool verifTempo, atirando;
 			int pontos;
 			const int jogador;
 			static int segueJogador;
@@ -22,6 +22,7 @@ namespace Entidades
 			int arma_sel;
 			ListaEntes* ini;
 			sf::Sound s1;
+			int maxVidas;
 
 		public:
 			Jogador(const int j);
@@ -47,6 +48,10 @@ namespace Entidades
 			void atirar();
 			void setl_ini(ListaEntes* i);
 			Ente* hitscan(Ente* e);
+			void setMaxVidas(int x) { maxVidas = x; };
+			int getMaxVidas() { return maxVidas; };
+			void setAtirando(int x) { atirando = x; };
+			bool getAtirando() { return atirando; };
 		};
 
 	}

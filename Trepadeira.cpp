@@ -7,6 +7,7 @@ Trepadeira::Trepadeira(float x, float y): Obstaculo(x,y)
 {
     srand(time(NULL));
     espinhosa = rand() % 2;
+    if (espinhosa == 1) espinhosa += 4;
     danoso = espinhosa;
     atacar = danoso;
     corpo.setTextureRect(sf::IntRect(0, 0, 512, 512));

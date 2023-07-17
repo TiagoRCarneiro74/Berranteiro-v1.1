@@ -15,17 +15,19 @@ Interface::Interface() : Ente(sf::Vector2f(0.0f, 0.0f)) {
 	rosto.setPosition(pos);
 
 	CorCheio.loadFromFile("Midia/Imagens/CorCheio.png");
-	CorVazio.loadFromFile("Midia/Imagens/CorVazio.png");
-	v1.setTexture(CorCheio);
-	v2.setTexture(CorCheio);
-	v3.setTexture(CorCheio);
-	v4.setTexture(CorVazio);
-	v5.setTexture(CorVazio);
-	v1.setTextureRect(sf::IntRect(0, 0, 16, 16));
-	v2.setTextureRect(sf::IntRect(0, 0, 16, 16));
-	v3.setTextureRect(sf::IntRect(0, 0, 16, 16));
-	v4.setTextureRect(sf::IntRect(0, 0, 16, 16));
-	v5.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	cor.setTexture(CorCheio);
+	cor.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	cor.setScale(2, 2);
+	cor.setPosition(pos.x, pos.y + 68);
+
+	TFrame.loadFromFile("Midia/Imagens/HealthFrame.png");
+	frame.setTexture(TFrame);
+	frame.setTextureRect(sf::IntRect(0, 0, 76, 13));
+	frame.setPosition(pos.x + 36, pos.y + 68);
+
+	HBar.setFillColor(sf::Color::Green);
+	HBar.setPosition(pos.x + 36, pos.y + 84);
+	HBar.setSize(sf::Vector2f(100, 12));
 
 	mag = new Textbox();
 	ammo = new Textbox();
@@ -62,19 +64,17 @@ void Interface::alteraMag(int x) {
 
 void Interface::imprimir() {
 	gerente->desenhaElemento(rosto);
-	gerente->desenhaElemento(v1);
-	gerente->desenhaElemento(v2);
-	gerente->desenhaElemento(v3);
-	gerente->desenhaElemento(v4);
-	gerente->desenhaElemento(v5);
+	gerente->desenhaElemento(cor);
 	ammo->draw(gerente->getWindow());
 	mag->draw(gerente->getWindow());
+	gerente->imprimeRet(HBar);
+	gerente->desenhaElemento(frame);
 }
 
 void Interface::atualiza() {
-	//I. Corações.
+	//I. Health Bar.
 
-	for (int i = 1; i <= 5; i++) {
+	/*for (int i = 1; i <= 5; i++) {
 		if (i <= j->getVidas()) {
 			if (i == 1) v1.setTexture(CorCheio);
 			if (i == 2) v2.setTexture(CorCheio);
@@ -89,12 +89,16 @@ void Interface::atualiza() {
 			if (i == 4) v4.setTexture(CorVazio);
 			if (i == 5) v5.setTexture(CorVazio);
 		}
-	}
+	}*/
+
+	float f = (j->getVidas() / (float)j->getMaxVidas()) * 100;
+	HBar.setSize(sf::Vector2f(f, 12));
 
 
 	//II. Munições & Rosto.
 
 	Arma* x = j->getl_arma()->getElX(j->getArmaSel())->getInfo();
+	x->verifReload();
 	mag->setText("CAR.: "+to_string((int)x->getMagvar()));
 	ammo->setText("TOTAL: " + to_string((int)x->getAmmo()));
 
@@ -103,13 +107,11 @@ void Interface::atualiza() {
 
 	sf::Vector2f pos = sf::Vector2f(gerente->getCoorView().x - 320, gerente->getCoorView().y - 240);
 	rosto.setPosition(pos);
-	v1.setPosition(sf::Vector2f(pos.x, pos.y + 68));
-	v2.setPosition(sf::Vector2f(pos.x + 18, pos.y + 68));
-	v3.setPosition(sf::Vector2f(pos.x + 36, pos.y + 68));
-	v4.setPosition(sf::Vector2f(pos.x + 54, pos.y + 68));
-	v5.setPosition(sf::Vector2f(pos.x + 72, pos.y + 68));
+	cor.setPosition(sf::Vector2f(pos.x, pos.y + 68));
 	ammo->setPosition(sf::Vector2f(pos.x + 68, pos.y));
 	mag->setPosition(sf::Vector2f(pos.x + 68, pos.y + 32));
+	HBar.setPosition(pos.x + 36, pos.y + 84);
+	frame.setPosition(pos.x + 36, pos.y + 68);
 }
 
 void Interface::teste() {

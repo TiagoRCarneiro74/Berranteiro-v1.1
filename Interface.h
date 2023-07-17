@@ -10,8 +10,9 @@ using namespace Personagens;
 class Interface : public Ente {
 private:
 	sf::Sprite rosto;
-	sf::Sprite v1, v2, v3, v4, v5;
-	sf::Texture TRosto, CorCheio, CorVazio;
+	sf::Sprite cor, frame;
+	sf::RectangleShape HBar;
+	sf::Texture TRosto, CorCheio, TFrame;
 	Textbox *mag, *ammo;
 	sf::Font* f;
 	Jogador* j;
