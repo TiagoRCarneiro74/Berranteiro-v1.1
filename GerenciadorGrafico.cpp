@@ -5,7 +5,11 @@ using namespace Gerenciadores;
 GerenciadorGrafico* GerenciadorGrafico::pGrafico = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() {
-	window = new sf::RenderWindow(sf::VideoMode(640, 480), "Jogo");
+	window = new sf::RenderWindow(sf::VideoMode(640, 480), "Berranteiro++ v1.1");
+	window->setFramerateLimit(60);
+	sf::Image im;
+	im.loadFromFile("Midia/Imagens/Icon2.png");
+	window->setIcon(48, 48, im.getPixelsPtr());
 	view.setCenter(sf::Vector2f(320.0f, 240.0f));
 	view.setSize(sf::Vector2f(640, 480));
 }

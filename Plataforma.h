@@ -13,7 +13,7 @@ namespace Entidades
 		bool nula = false;
 
 	public:
-		Plataforma(sf::Vector2f coor);
+		Plataforma(sf::Vector2f* coor);
 		~Plataforma();
 		void move();
 		const bool getNula();

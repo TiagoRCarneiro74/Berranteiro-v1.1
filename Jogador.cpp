@@ -65,9 +65,14 @@ void Jogador::atualizaPos() {
 	//}
 
 	//if (pos.y < 430 && pos.y > 0) pos.y = pos.y + vel.y;
-	if (gerente->getCoorView().x >= 320 && (pos.x <= gerente->getCoorView().x - 40 && vel.x<0) ||
+	/*if (gerente->getCoorView().x >= 320 && (pos.x <= gerente->getCoorView().x - 40 && vel.x<0) ||
 	(gerente->getCoorView().x + vel.x <= pMapa2->getLista()->getElX(pMapa2->getLista()->getTam())->getInfo()->getPos().x && pos.x >= gerente->getCoorView().x + 40 && vel.x>0)) {
 			
+		if (numVidas > 0) gerente->setView(sf::Vector2f(gerente->getCoorView().x + vel.x, gerente->getCoorView().y));
+	}*/
+
+	if (gerente->getCoorView().x >= 320 && (pos.x <= gerente->getCoorView().x - 40 && vel.x < 0) || (pos.x >= gerente->getCoorView().x + 40 && vel.x > 0)) {
+
 		if (numVidas > 0) gerente->setView(sf::Vector2f(gerente->getCoorView().x + vel.x, gerente->getCoorView().y));
 	}
 		//else
@@ -207,13 +212,13 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 	if (trunc(getPos().x + getTam().x) <= hbx->getPos().x + 16 && getPos().y >= hbx->getPos().y - getTam().y + 8) {
 		setPos(sf::Vector2f(hbx->getPos().x - getTam().x, getPos().y));
 		//pJogador->setVelY(-0.3f);
-		//std::cout << "Colisao com a direita.\n";
+		std::cout << "Colisao com a direita.\n";
 		setVelY(getVel().y / 1.1f);
 		flag = 1;
 	}
 	else if (getPos().x - 8 >= hbx->getPos().x + hbx->getTam().x - 16 && getPos().y >= hbx->getPos().y - getTam().y + 8) {
 		setPos(sf::Vector2f(hbx->getPos().x + hbx->getTam().x, getPos().y));
-		//std::cout << "Colisao com a esquerda.\n";
+		std::cout << "Colisao com a esquerda.\n";
 		//if (pJogador->getVel().y <= 0.6 && pJogador->getVel().y >= 0.2) pJogador->setVelY(-0.3f);
 		//else pJogador->setVelY(pJogador->getVel().y / 2.0f);
 		setVelY(getVel().y / 1.1f);
@@ -222,7 +227,7 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 
 
 	else if (trunc(getPos().y + getTam().y) + 8 >= trunc(hbx->getPos().y) && getVel().y >= 0) {
-		//std::cout << "Colisao abaixo.\n";
+		std::cout << "Colisao abaixo.\n";
 		//int py = pJogador->getPos().y / 32;
 		//py = py * 32;
 		if (getVel().y > 0) {
@@ -233,7 +238,7 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 		flag = 1;
 	}
 	else if (getPos().y >= hbx->getPos().y + hbx->getTam().y - 16) {
-		//std::cout << "Colisao acima.\n";
+		std::cout << "Colisao acima.\n";
 		setVelY(-getVel().y);
 		setPos(getPos().x, hbx->getPos().y + hbx->getTam().y);
 	}

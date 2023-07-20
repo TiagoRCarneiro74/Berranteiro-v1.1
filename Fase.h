@@ -33,6 +33,7 @@ namespace Fases
             Jogador* j2;
             Mapa* mapa2;
             Interface* interf;
+            sf::Clock clock;
             //Lista<Obstaculo>* obs;
 
         public:

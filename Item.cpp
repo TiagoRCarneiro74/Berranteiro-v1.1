@@ -16,3 +16,20 @@ void Item::move() {
 	pos.y = pos.y + vel.y;
 	corpo.setPosition(pos.x, pos.y);
 }
+
+void Item::setSound(sf::SoundBuffer x) { 
+	db = x;
+	d.setBuffer(db);
+};
+
+void Item::findar() {}
+
+void Item::setVidas(int n) {
+	numVidas = n;
+	if (n <= 0) {
+		vivo = false;
+		if (d.getBuffer() != NULL) d.play();
+		findar();
+	}
+	else vivo = true;
+}

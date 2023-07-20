@@ -10,6 +10,8 @@ class Item : public Entidade {
 protected:
 	Jogador* j;
 	string nome;
+	sf::Sound d;
+	sf::SoundBuffer db;
 
 public:
 	Item(Jogador* jo, float x, float y);
@@ -17,4 +19,7 @@ public:
 	virtual void pegar();
 	void move();
 	string getNome() { return nome; }
+	void setVidas(int n);
+	void setSound(sf::SoundBuffer x);
+	virtual void findar();
 };

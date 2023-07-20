@@ -84,7 +84,10 @@ void Fase1::executar()
         interf->atualiza();
         interf->imprimir();
 		pGraf->mostraElementos();
-        interf->teste();
+        float t = clock.restart().asSeconds();
+        float fps = 1.0f / (t);
+        std::cout << "FPS: " << fps << "\n";
+        //interf->teste();
         //interface->atualiza();
         //interface->imprimir();
     }
@@ -181,7 +184,9 @@ void Fase1::geraTrepadeira(float x, float y)
 
 void Fase1::geraItens() {
     geraItem(2368, 300, "skorpion");
+    geraItem(2300, 300, "caixa");
     geraItem(1000, 200, "med");
+    geraItem(920, 180, "caixa");
     geraItem(1100, 200, "med");
     geraItem(3300, 300, "med");
     geraItem(4330, 820, "med");

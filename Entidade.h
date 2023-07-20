@@ -30,7 +30,7 @@ namespace Entidades
 		void operator++();
 		void operator--();
 		void repos(float x, float y) { pos.x = pos.x + x; pos.y = pos.y + y; corpo.setPosition(pos.x, pos.y); }
-		void setVidas(int n);
+		virtual void setVidas(int n);
 		bool getObstaculo();
 		bool getIsItem() { return item; }
 	};

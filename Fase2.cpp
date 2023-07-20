@@ -94,6 +94,9 @@ void Fase2::executar()
         interf->atualiza();
         interf->imprimir();
         pGraf->mostraElementos();
+        float t = clock.restart().asSeconds();
+        float fps = 1.0f / (t);
+        std::cout << "FPS: " << fps << "\n";
     }
     std::cout << "O loop de execucao da fase terminou.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     if (f1->getStatus() == sf::Music::Playing) f1->pause();
