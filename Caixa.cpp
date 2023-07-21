@@ -12,6 +12,8 @@ Caixa::Caixa(Jogador* jo, float sx, float sy) : Item(jo, sx, sy) {
 	corpo.setScale(0.25f, 0.25f);
 	numVidas = 10;
 	nome = "caixa";
+	db.loadFromFile("Midia/Musicas/bustcrate1.wav");
+	d.setBuffer(db);
 }
 
 Caixa::~Caixa() {}
@@ -19,6 +21,7 @@ Caixa::~Caixa() {}
 void Caixa::pegar() {}
 
 void Caixa::findar() {
+	d.play();
 	srand(time(NULL));
 	int x = rand() % 10;
 	if (x == 0) f->geraItem(pos.x - 50, pos.y - 20, "skorpion");
