@@ -41,8 +41,8 @@ void Resumir::executar()
 		pMenu->getFase1()->getMusica()->play();
 	}
 
-	j1->setVidas(3);
-	j2->setVidas(3);
+	j1->setVidas(50);
+	j2->setVidas(50);
 
 	if(j1->getSegue()==1)
 	{

@@ -12,6 +12,7 @@ namespace Entidades
 
 		class Jogador : public Personagem {
 		private:
+			//sf::Texture Tesq, Tdir, Adir, Aesq;
 			Mapa* pMapa2;
 			sf::Clock tempoDano;
 			bool verifTempo, atirando;

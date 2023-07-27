@@ -105,6 +105,14 @@ void Fase::geraArara(float x, float y)
 
 }
 
+void Fase::geraSoldado(float x, float y, int s)
+{
+    Soldado *ini; 
+    ini = new Soldado(j1, j2, x, y, s);
+    inimigos->add(static_cast<Entidade*>(ini));
+    lista->add(static_cast<Entidade*>(ini));
+}
+
 void Fase::geraPedra(float x, float y)
 {
     Pedra* p2 = new Pedra(x, y);

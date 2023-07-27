@@ -105,11 +105,12 @@ void Fase1::geraInimigos()
     float x = 300;
     float y = 100;
     geraOnca(660, 376);
-    geraOnca(608, 120);
+    geraSoldado(1000, 120, 1);
     geraOnca(3224, 1462);
     geraArara(2384, 250);
     geraArara(1312, 150);
     geraArara(2936, 568);
+    geraSoldado(3456, 662, 2);
 
 
     verif = rand() % 4;
@@ -121,11 +122,11 @@ void Fase1::geraInimigos()
     verif = rand() % 4;
     if (verif == 1) geraOnca(2304, 374);
     verif = rand() % 4;
-    if (verif == 1) geraOnca(3456, 662);
-    verif = rand() % 4;
+    /*if (verif == 1) geraSoldado(3456, 662, 2);
+    verif = rand() % 4;*/
     if (verif == 1) geraOnca(3014, 1335);
     verif = rand() % 4;
-    if (verif == 1) geraOnca(4334, 823);
+    if (verif == 1) geraSoldado(4334, 823, 2);
     verif = rand() % 4;
     if (verif == 1) geraOnca(3110, 1848);
 

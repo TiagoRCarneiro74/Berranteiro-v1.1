@@ -114,7 +114,7 @@ void Fase2::geraInimigos()
     float x = 300;
     float y = 100;
     Curupira* c;
-    geraOnca(4830, 888);
+    geraSoldado(4830, 888, 2);
     geraOnca(7912, 472);
     geraOnca(9110, 855);
     geraOnca(9286, 855);
@@ -122,7 +122,7 @@ void Fase2::geraInimigos()
     geraOnca(12142, 823);
     geraOnca(12342, 823);
     geraArara(5344, 544);
-    geraArara(6592, 544);
+    geraSoldado(6592, 544, 1);
     geraArara(8320, 192);
     geraArara(9184, 768);
     geraArara(9536, 576);
@@ -140,7 +140,7 @@ void Fase2::geraInimigos()
     verif = rand() % 4;
     if (verif == 1) geraOnca(8110, 920);
     verif = rand() % 4;
-    if (verif == 1) geraOnca(9406, 1496);
+    if (verif == 1) geraSoldado(9406, 1496, 1);
     verif = rand() % 4;
     if (verif == 1) geraOnca(10126, 728);
     verif = rand() % 3;

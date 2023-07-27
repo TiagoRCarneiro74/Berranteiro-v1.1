@@ -15,6 +15,7 @@ protected:
 	sf::Sound r0;
 	string nome;
 	bool hitscan, dry, recarregando;
+	bool inimigo;
 
 public:
 	Arma(string n);

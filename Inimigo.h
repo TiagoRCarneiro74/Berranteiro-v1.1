@@ -24,8 +24,8 @@ namespace Entidades
         public:
             Inimigo(Jogador* j1, Jogador* j2, float x, float y);
             ~Inimigo();
-            void move();
-            void persegueJogador(sf::Vector2f posiJogador);
+            virtual void move();
+            void persegueJogador(sf::Vector2f posiJogador, float x);
             void movimentoAleatorio();
             virtual void ataque(sf::Vector2f posiJogador);
             void congela();

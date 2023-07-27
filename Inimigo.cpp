@@ -5,7 +5,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Inimigo::Inimigo(Jogador *j1, Jogador *j2, float x, float y) :
-Personagem(1, 103, x, y)
+Personagem(20, 103, x, y)
 {
     jogador1 = j1;
     jogador2 = j2;
@@ -40,13 +40,23 @@ void Inimigo::move()
             else
                 posiJogador = posiJogador2;
             
-            if (abs(posiJogador.x - pos.x)<200 && abs(posiJogador.y - pos.y)<200)
+            if (abs(posiJogador.x - pos.x)<200)
             {
-                ataque(posiJogador);
+                if(voa==true)
+                    ataque(posiJogador);
+                else
+                {
+                    if(abs(posiJogador.y - pos.y)<100)
+                    {
+                        ataque(posiJogador);
+                    }
+                }
             }
             else if(abs(posiJogador.x - pos.x)<400 && abs(posiJogador.y - pos.y)<400)
             {
-                persegueJogador(posiJogador);
+                if(voa==true || abs(posiJogador.y - pos.y)<100)
+                    persegueJogador(posiJogador, 0.8);
+
                 atacar = false;
             }
             else
@@ -71,14 +81,24 @@ void Inimigo::move()
     
 }
 
-void Inimigo::persegueJogador(sf::Vector2f posiJogador)
+void Inimigo::persegueJogador(sf::Vector2f posiJogador, float x)
 {
     
     vel.x = 0.0;
 
-    if((posiJogador.x - pos.x)<0) {  vel.x = vel.x - 0.8; }
+    if((posiJogador.x - pos.x)<0) {  vel.x = vel.x - x; }
 
-    else if((posiJogador.x - pos.x)>0) { vel.x = vel.x + 0.8; }
+    else if((posiJogador.x - pos.x)>0) { vel.x = vel.x + x; }
+
+    if(voa==true)
+    {
+        if((posiJogador.y - pos.y)<0)
+            vel.y = vel.y - x;
+        else if((posiJogador.y - pos.y)>0)
+            vel.y = vel.y + x;
+        else
+            vel.y = 0;
+    }
     
 
 }

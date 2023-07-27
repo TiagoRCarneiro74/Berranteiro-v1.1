@@ -31,7 +31,7 @@ Jogo::Jogo() {
 	}
 	catch (Jogador j) {
 		cout << "Nao ha jogador construido.\n";
-		Jogo::~Jogo();
+		//Jogo::~Jogo();
 		chk = 0;
 	}
 	if (chk == 1) executar();

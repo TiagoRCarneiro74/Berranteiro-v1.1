@@ -3,7 +3,6 @@
 #include "GerenciadorColisao.h"
 #include "GerenciadorEvento.h"
 #include "ListaEntes.h"
-#include "Hitbox.h"
 #include "Mapa.h"
 #include "Onca.h"
 #include "Arara.h"
@@ -13,6 +12,7 @@
 #include "Curupira.h"
 #include "Obstaculo.h"
 #include "Interface.h"
+#include "Soldado.h"
 using namespace Entidades;
 using namespace Personagens;
 using namespace Gerenciadores;
@@ -59,6 +59,7 @@ namespace Fases
             void geraPedra(float x, float y);
             void geraEspinho(float x, float y, int tam);
             void geraItem(float x, float y, string nome);
+            void geraSoldado(float x, float y, int s);
             GerenciadorEvento* getEvent();
             void moveLista();
     };

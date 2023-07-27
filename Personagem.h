@@ -14,6 +14,7 @@ namespace Entidades
         protected:
             //int dano;
             bool virado;
+            sf::Texture Tesq, Tdir, Adir, Aesq;
 
         public:
             Personagem(const int v, const int id, float x, float y);

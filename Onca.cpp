@@ -13,32 +13,40 @@ Inimigo(j1, j2, x, y)
     voa = false;
 
     corpo.setTextureRect(sf::IntRect(0, 0, 497, 340));
-    if(!textura.loadFromFile("Midia/Imagens/Onca.png")) std::cout << "Erro na abertura da textura do inimigo." << std::endl;
+    if(!textura.loadFromFile("Midia/Imagens/OncaE.png")) std::cout << "Erro na abertura da textura do inimigo." << std::endl;
     else {
         corpo.setTexture(textura);
     }
     corpo.setScale(0.2, 0.2);
+    Tdir.loadFromFile("Midia/Imagens/OncaD.png");
+    Tesq.loadFromFile("Midia/Imagens/OncaE.png");
+    Adir.loadFromFile("Midia/Imagens/OncaAtaqueD.png");
+    Aesq.loadFromFile("Midia/Imagens/OncaAtaqueE.png");
 }
 
 Onca::~Onca(){}
 
 void Onca::viradoEsq()
 {
-    textura.loadFromFile("Midia/Imagens/Onca.png");   
+    corpo.setTexture(Tesq); 
+    corpo.setTextureRect(sf::IntRect(0, 0, 497, 340));
 }
 void Onca::viradoDir()
 {
-    textura.loadFromFile("Midia/Imagens/OncaVirada.png");
+    corpo.setTexture(Tdir);
+    corpo.setTextureRect(sf::IntRect(0, 0, 497, 340));
 }
 
 void Onca::ataqueDir()
 {
-	textura.loadFromFile("Midia/Imagens/OncaAtaque.png");
+	corpo.setTexture(Adir);
+    corpo.setTextureRect(sf::IntRect(0, 0, 512, 317));
 }
 
 void Onca::ataqueEsq()
 {
-	textura.loadFromFile("Midia/Imagens/OncaAtaque2.png");
+	corpo.setTexture(Aesq);
+    corpo.setTextureRect(sf::IntRect(0, 0, 512, 317));
 }
 
  void Onca::ataque(sf::Vector2f posiJogador)

@@ -8,7 +8,7 @@ Curupira::Curupira(Jogador* j1, Jogador* j2, float x, float y):
 Inimigo(j1, j2, x, y)
 {
 	dano = 1;
-	numVidas = 4;
+	numVidas = 200;
 	ressucitar = false;
     ataqueDistancia = true;
 	atirar = true;
@@ -123,7 +123,7 @@ void Curupira::ataque(sf::Vector2f posiJogador)
 	}
     else
     {
-        persegueJogador(posiJogador);
+        persegueJogador(posiJogador, 0.8);
     }
 
 	atirar = false;
@@ -147,9 +147,9 @@ void Curupira::afastar(sf::Vector2f posiJogador)
 
     vel.x = 0.0;
 
-	if((posiJogador.x - pos.x)<0) {  vel.x = vel.x + v; }
+	if((posiJogador.x - pos.x)<0) {  vel.x = vel.x - v; }
 
-    else if((posiJogador.x - pos.x)>0) { vel.x = vel.x - v; }
+    else if((posiJogador.x - pos.x)>0) { vel.x = vel.x + v; }
 
 	if(vel.y==0) { vel.y = -2; }
 }

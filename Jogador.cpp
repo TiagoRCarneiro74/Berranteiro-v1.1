@@ -101,12 +101,12 @@ void Jogador::viradoDir()
 		
 		if (arma_sel == 1) {
 			corpo.setTextureRect(sf::IntRect(0, 0, 288, 370));
-			textura.loadFromFile("Midia/Imagens/J1Direita.png");
+			//textura.loadFromFile("Midia/Imagens/J1Direita.png");
 		}
 		else {
 			corpo.setTextureRect(sf::IntRect(0, 0, l_arma->getElX(arma_sel)->getInfo()->getTdir()->getSize().x, 370));
-			this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getTdir()));
 		}
+		this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getTdir()));
 	}
 	else
 	{
@@ -120,12 +120,12 @@ void Jogador::viradoEsq()
 	{
 		if (arma_sel == 1) {
 			corpo.setTextureRect(sf::IntRect(0, 0, 288, 370));
-			textura.loadFromFile("Midia/Imagens/J1Esquerda.png");
+			//textura.loadFromFile("Midia/Imagens/J1Esquerda.png");
 		}
 		else {
 			corpo.setTextureRect(sf::IntRect(0, 0, l_arma->getElX(arma_sel)->getInfo()->getTesq()->getSize().x, 370));
-			this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getTesq()));
 		}
+		this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getTesq()));
 	}
 	else
 	{
@@ -140,12 +140,12 @@ void Jogador::ataqueDir()
 	{
 		if (arma_sel == 1) {
 			corpo.setTextureRect(sf::IntRect(0, 0, 477, 363));
-			textura.loadFromFile("Midia/Imagens/J1AtaqueDireita.png");
+			//textura.loadFromFile("Midia/Imagens/J1AtaqueDireita.png");
 		}
 		else {
 			corpo.setTextureRect(sf::IntRect(0, 0, l_arma->getElX(arma_sel)->getInfo()->getAdir()->getSize().x, 370));
-			this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getAdir()));
 		}
+		this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getAdir()));
 	}
 	else
 	{
@@ -160,12 +160,12 @@ void Jogador::ataqueEsq()
 	{
 		if (arma_sel == 1) {
 			corpo.setTextureRect(sf::IntRect(0, 0, 477, 363));
-			textura.loadFromFile("Midia/Imagens/J1AtaqueEsquerda.png");
+			//textura.loadFromFile("Midia/Imagens/J1AtaqueEsquerda.png");
 		}
 		else {
 			corpo.setTextureRect(sf::IntRect(0, 0, l_arma->getElX(arma_sel)->getInfo()->getAesq()->getSize().x, 370));
-			this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getAesq()));
 		}
+		this->setTextura(*((l_arma->getElX(arma_sel)->getInfo())->getAesq()));
 	}
 	else
 	{
