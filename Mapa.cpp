@@ -1,5 +1,5 @@
 #include "Mapa.h"
-#include "Windows.h"
+//#include "Windows.h"
 #include <iostream>
 
 Mapa::Mapa() : lista(), colidiveis()  {
@@ -64,16 +64,16 @@ void Mapa::inicializaAuto(sf:: Vector2f ini, sf::Vector2f fim) {
 				chk = 1;
 				//cout << "Item adicionado a lista.\n";
 				lista.incluirEl(p);
-				if (pos->x <= ini.x + len / 3 || pos->x - p->getTam().x <= ini.x + len / 3) {
+				if (pos->x <= ini.x + len / 2.5 || pos->x - p->getTam().x <= ini.x + len / 2.5) {
 					c1.incluirEl(p);
 					//cout << "ADICAO A C1.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 				}
-				if ((pos->x > ini.x + len / 6 || pos->x - p->getTam().x > ini.x + len / 6) 
-					&& (pos->x < ini.x + len / 2 || pos->x - p->getTam().x < ini.x + len / 2)) c1b.incluirEl(p);
-				if ((pos->x > ini.x + len / 3 || pos->x - p->getTam().x > ini.x + len / 3)
-					&& (pos->x < ini.x + 2 * len / 3 || pos->x - p->getTam().x < ini.x + 2 * len / 3)) c2.incluirEl(p);
-				if ((pos->x > ini.x + len / 2 || pos->x - p->getTam().x > ini.x + len / 2)
-					&& (pos->x < ini.x + 5 * len / 6 || pos->x - p->getTam().x < ini.x + 5 * len / 6)) c2b.incluirEl(p);
+				if ((pos->x > ini.x + len / 5 || pos->x - p->getTam().x > ini.x + len / 5) 
+					&& (pos->x < ini.x + len / 1.6666 || pos->x - p->getTam().x < ini.x + len / 1.6666)) c1b.incluirEl(p);
+				if ((pos->x > ini.x + len / 2.5 || pos->x - p->getTam().x > ini.x + len / 2.5)
+					&& (pos->x < ini.x + 2 * len / 2.5 || pos->x - p->getTam().x < ini.x + 2 * len / 2.5)) c2.incluirEl(p);
+				if ((pos->x > ini.x + len / 1.6666 || pos->x - p->getTam().x > ini.x + len / 1.6666)
+					&& (pos->x < ini.x + 5 * len / 5 || pos->x - p->getTam().x < ini.x + 5 * len / 5)) c2b.incluirEl(p);
 				if ((pos->x > ini.x + 2 * len / 3 || pos->x - p->getTam().x > ini.x + 2 * len / 3)
 					&& (pos->x < ini.x + len || pos->x - p->getTam().x < ini.x + len)) c3.incluirEl(p);
 				//if (pos->x > ini.x + len / 3 && pos->x < ini.x + 2 * len / 3) c2.incluirEl(p);

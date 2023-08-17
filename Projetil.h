@@ -15,6 +15,7 @@ namespace Entidades
 			bool direita;
 			bool ativado;
 			Inimigo *atirador;
+			sf::Clock clock;
 
 		public:
 			Projetil(float x, float y);

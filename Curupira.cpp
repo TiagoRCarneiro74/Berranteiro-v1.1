@@ -1,21 +1,23 @@
 #include "Curupira.h"
+#include "Chave.h"
 
 using namespace Entidades;
 using namespace Personagens;
+using namespace Itens;
 
 
 Curupira::Curupira(Jogador* j1, Jogador* j2, float x, float y):
 Inimigo(j1, j2, x, y)
 {
 	dano = 1;
-	numVidas = 200;
+	numVidas = 1000;
 	ressucitar = false;
     ataqueDistancia = true;
 	atirar = true;
 	corre = false;
-	fogo = new Projetil(x, y);
+	fogo = new Projetil(x, y + 40);
 	fogo->setAtirador(static_cast<Inimigo*>(this));
-
+	virado = 1;
 	corpo.setTextureRect(sf::IntRect(0,0,237,448));
 	if(!textura.loadFromFile("Midia/Imagens/CurupiraEsquerda.png")) std::cout << "Erro na abertura da textura do inimigo." << std::endl;
     	else {
@@ -31,28 +33,32 @@ Curupira::~Curupira()
 }
 void Curupira::viradoEsq()
 {
+	
 	textura.loadFromFile("Midia/Imagens/CurupiraEsquerda.png");
 	corpo.setTextureRect(sf::IntRect(0,0,237,448));
 }
 void Curupira::viradoDir()
 {
+	
 	textura.loadFromFile("Midia/Imagens/CurupiraDireita.png");
 	corpo.setTextureRect(sf::IntRect(0,0,242,448));
 }
 void Curupira::ataqueDir()
 {
+	
 	textura.loadFromFile("Midia/Imagens/CurupiraAtaqueDireita.png");
 	corpo.setTextureRect(sf::IntRect(0,0,302,433));
 }
 void Curupira::ataqueEsq()
 {
+	
 	textura.loadFromFile("Midia/Imagens/CurupiraAtaqueEsquerda.png");
 	corpo.setTextureRect(sf::IntRect(0,0,303,430));
 }
 
 void Curupira::move()
 {
-
+	if (proj.getElapsedTime().asSeconds() > 6) fogo->setVidas(3);
 	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
     if (pos.x > graf->getCoorView().x + 500 || pos.x < graf->getCoorView().x - 500 || pos.y > graf->getCoorView().y + 400 || pos.y < graf->getCoorView().y - 400) {
         congela();
@@ -101,7 +107,9 @@ void Curupira::move()
 		verifImg();
 
 		vel.x = 0;
-
+		if (fogo->getVivo() == false && proj.getElapsedTime().asSeconds() > 6.2) {
+			proj.restart();
+		}
 	}
 
 }
@@ -189,3 +197,14 @@ Projetil* Curupira::getFogo()
 {
 	return fogo;
 }
+
+void Curupira::setVidas(int x) {
+	numVidas = x;
+	if (x <= 0) {
+		Item* i = f->geraItem(pos.x, pos.y, item);
+		static_cast <Chave*> (i)->setFase(f);
+		vivo = false;
+	}
+	else vivo = true;
+}
+	

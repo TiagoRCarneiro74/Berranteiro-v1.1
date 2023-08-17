@@ -19,6 +19,18 @@ Sair::~Sair() {}
 
 void Sair::atualiza() {
 	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
+	int tamx = graf->getWindow()->getSize().x;
+	int tamy = graf->getWindow()->getSize().y;
+	if (tamx == 1360) {
+		corpo.setScale(1.45f, 1.45f);
+		setPos(448, 0.83333 * tamy);
+		corpo.setPosition(448, 0.83333 * tamy);
+	}
+	else {
+		corpo.setScale(1, 1);
+		setPos(0.25 * tamx, 0.83333 * tamy);
+		corpo.setPosition(0.25 * tamx, 0.83333 * tamy);
+	}
 	if (sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x >= getPos().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 >= getPos().y && sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x <= getPos().x + getTam().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 <= getPos().y + getTam().y) {
 		selecionada = true;
 		sf::Texture tex;

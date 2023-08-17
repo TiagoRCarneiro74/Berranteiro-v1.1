@@ -12,9 +12,21 @@ Item::~Item() {}
 void Item::pegar() {}
 
 void Item::move() {
-	pos.x = pos.x + vel.x;
-	pos.y = pos.y + vel.y;
-	corpo.setPosition(pos.x, pos.y);
+	//pos.x = pos.x + vel.x;
+	//pos.y = pos.y + vel.y;
+	//corpo.setPosition(pos.x, pos.y);
+
+	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
+	if (pos.x > graf->getCoorView().x + graf->getView()->getSize().x / 2 || pos.x < graf->getCoorView().x - graf->getView()->getSize().x / 2 || pos.y > graf->getCoorView().y + graf->getView()->getSize().y / 2 || pos.y < graf->getCoorView().y - graf->getView()->getSize().y / 2) {
+		setVelX(0.0f);
+		setVelY(-0.3f);
+		cair();
+	}
+	else
+	{
+		pos.y += vel.y;
+		corpo.setPosition(pos.x, pos.y);
+	}
 }
 
 void Item::setSound(sf::SoundBuffer x) { 

@@ -7,17 +7,17 @@ using namespace Fases;
 
 namespace Itens {
 
-	class Skorpion : public Item {
+	class Chave : public Item {
 	private:
+		string* s;
 		Fase* f;
-		float ammo, magvar;
 
 	public:
-		Skorpion(Jogador* jo, float sx, float sy);
-		~Skorpion();
+		Chave(Jogador* jo, float sx, float sy);
+		~Chave();
+		void setString(string s0);
+		void setVidas(int n);
 		void pegar();
 		void setFase(Fase* f0) { f = f0; }
-		void setammo(float x) { ammo = x; }
-		void setmagvar(float x) { magvar = x; }
 	};
 }

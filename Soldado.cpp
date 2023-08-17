@@ -1,5 +1,11 @@
 #include "Soldado.h"
+#include "Item.h"
+#include "MP5.h"
+#include "Skorpion.h"
+#include "MunicaoMP5.h"
+#include "MunicaoSkorpion.h"
 
+using namespace Itens;
 using namespace Entidades;
 using namespace Personagens;
 
@@ -13,6 +19,7 @@ Inimigo(j1, j2, x, y)
     ataqueDistancia = true;
     voa = false;
 	skin = s;
+	numVidas = 100;
 
 	if(s==1)
 	{
@@ -91,7 +98,7 @@ void Soldado::move()
 			{
 				//persegueJogador(posiJogador, 0.1);
 				ataque(posiJogador);
-				contador++;
+				//contador++;
 			}
 
 			/*if(arma->getMagvar() == 0)
@@ -201,7 +208,8 @@ Ente* Soldado::hitscan(Ente* e) {
 void Soldado::ataque(sf::Vector2f posiJogador)
 {
 	clock_t t1 = clock();
-
+	if (t1 / CLOCKS_PER_SEC - arma->getClock() / CLOCKS_PER_SEC < 1.0 / arma->getCad()) return;
+	contador++;
 	/*if (t1 / (float)CLOCKS_PER_SEC - arma->getTR() / (float)CLOCKS_PER_SEC > arma->getRec() && arma->getRecarregando() == 1) {
 		arma->setDry(0);
 		arma->setMagvar(arma->getMag());
@@ -251,4 +259,24 @@ void Soldado::ataque(sf::Vector2f posiJogador)
 
 	static_cast <Jogador*> (e)->setVidas(static_cast <Jogador*> (e)->getVidas() - arma->getDano());
 	
+}
+
+void Soldado::setVidas(int n) {
+	numVidas = n;
+	if (n <= 0) {
+		vivo = false;
+		srand(time(NULL));
+		int x = rand() % 2;
+		if (x != 1) return;
+		if (skin == 1) {
+			Item* i = f->geraItem(pos.x, pos.y, "municaomp5");
+			int y = rand() % 23;
+			static_cast <MunicaoMP5*> (i)->setValor(26 + y);
+		}
+		else {
+			Item* i = f->geraItem(pos.x, pos.y, "municaoskorpion");
+			int y = rand() % 16;
+			static_cast <MunicaoSkorpion*> (i)->setValor(25 + y);
+		}
+	}
 }

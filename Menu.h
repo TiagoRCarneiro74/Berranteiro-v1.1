@@ -4,7 +4,9 @@
 #include "Opcao.h"
 #include "Fase1.h"
 #include "Fase2.h"
+#include "Fase3.h"
 #include "Textbox.h"
+#include "GerenciadorEvento.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 using namespace Fases;
@@ -27,12 +29,14 @@ private:
 	sf::Music* musica;
 	Fase1* f1;
 	Fase2* f2;
+	Fase3* f3;
 	Resumir* resumir;
 	BFase1* bfase1;
 	BFase2* bfase2;
 	Salvar* salvar;
 	Sair* sair;
 	Textbox* textbox;
+	GerenciadorEvento* pEvent;
 
 public:
 	Menu();
@@ -48,7 +52,10 @@ public:
 	void setFase1(Fase1* f);
 	Fase2* getFase2();
 	void setFase2(Fase2* f);
+	Fase3* getFase3() { return f3; }
+	void setFase3(Fase3* f) { f3 = f; }
 	Fase* getFase();
 	void setTextbox(Textbox* t);
 	Textbox* getTextbox();
+	void setEvent(GerenciadorEvento* p) { pEvent = p; }
 };

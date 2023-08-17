@@ -24,6 +24,8 @@ Jogo::Jogo() {
 	//menuopc->setSair(sair);
 	//menuopc->setFase1(f);
 	//jogador1 = f->getJogador1();
+	//pEvent->executar();
+	menuopc->setEvent(pEvent);
 	menuopc->executar();
 	bool chk = 1;
 	try { 
@@ -77,11 +79,11 @@ void Jogo::executar() {
 			break;
 		}
 	}*/
-	if (menuopc->getFase2()) {
-		jogador1 = menuopc->getFase2()->getJogador1();
-		jogador2 = menuopc->getFase2()->getJogador2();
+	if (menuopc->getFase3()) {
+		jogador1 = menuopc->getFase3()->getJogador1();
+		jogador2 = menuopc->getFase3()->getJogador2();
 		//menuopc->getFase1()->getEvent()->setMenu(menuopc);
-		if (GerenciadorGrafico::getGerenciadorGrafico()->verifJanelaAberta()) menuopc->getFase2()->executar();
+		if (GerenciadorGrafico::getGerenciadorGrafico()->verifJanelaAberta()) menuopc->getFase3()->executar();
 	}
 	else if (menuopc->getFase1()) {
 		jogador1 = menuopc->getFase1()->getJogador1();

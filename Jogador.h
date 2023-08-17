@@ -24,6 +24,7 @@ namespace Entidades
 			ListaEntes* ini;
 			sf::Sound s1;
 			int maxVidas;
+			Lista<string>* itens;
 
 		public:
 			Jogador(const int j);
@@ -53,6 +54,13 @@ namespace Entidades
 			int getMaxVidas() { return maxVidas; };
 			void setAtirando(int x) { atirando = x; };
 			bool getAtirando() { return atirando; };
+			Lista<string>* getItens() { return itens; };
+			//void setArmaSel(int x) { arma_sel = x; }
+			//Municoes getMunicoes() { return municoes; }
+			//void setMunMP5(int x) { municoes.mp5 = x; }
+			//void setMunSkorpion(int x) { municoes.skorpion = x; }
+			//void setMunPistola(int x) { municoes.pistola = x; }
+			//Interface* getInterface() { return interf; }
 		};
 
 	}

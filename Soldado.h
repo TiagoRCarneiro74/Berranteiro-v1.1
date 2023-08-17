@@ -1,7 +1,9 @@
 #pragma once
 #include "Inimigo.h"
 #include "Arma.h"
+#include "Fase.h"
 
+using namespace Fases;
 namespace Entidades
 {
     namespace Personagens
@@ -17,6 +19,7 @@ namespace Entidades
                 sf::Clock relogio;
                 float dt;
                 int contador;
+                Fase* f;
 
             public:
                 Soldado(Jogador *j1, Jogador *j2, float x, float y, int s);
@@ -28,6 +31,8 @@ namespace Entidades
                 void ataqueEsq();
                 void afastar(sf::Vector2f posiJogador);
                 void ataque(sf::Vector2f posiJogador);
+                void setVidas(int n);
+                void setFase(Fase* f0) { f = f0; };
 
 			    //void atirar();
 			    Ente* hitscan(Ente* e);

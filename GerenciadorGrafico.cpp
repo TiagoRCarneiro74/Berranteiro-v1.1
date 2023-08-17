@@ -5,13 +5,14 @@ using namespace Gerenciadores;
 GerenciadorGrafico* GerenciadorGrafico::pGrafico = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() {
-	window = new sf::RenderWindow(sf::VideoMode(640, 480), "Berranteiro++ v1.1");
+	window = new sf::RenderWindow(sf::VideoMode(1360, 700), "Berranteiro++ v1.1");
 	window->setFramerateLimit(60);
 	sf::Image im;
 	im.loadFromFile("Midia/Imagens/Icon2.png");
 	window->setIcon(48, 48, im.getPixelsPtr());
 	view.setCenter(sf::Vector2f(320.0f, 240.0f));
-	view.setSize(sf::Vector2f(640, 480));
+	view.setSize(sf::Vector2f(1360, 700));
+	window->setPosition(sf::Vector2i(-8, 0));
 }
 
 GerenciadorGrafico::~GerenciadorGrafico() {
@@ -53,3 +54,19 @@ sf::View* GerenciadorGrafico::getView() { return &view; }
 void GerenciadorGrafico::imprimeRet(sf::RectangleShape ret) { window->draw(ret); }
 
 void GerenciadorGrafico::imprimeTexto(sf::Text tex) { window->draw(tex); }
+
+void GerenciadorGrafico::maximizaJanela() {
+	window->setSize(sf::Vector2u(1360.0f, 700.0f));
+	view.setSize(sf::Vector2f(1360.0f, 700.0f));
+	window->setPosition(sf::Vector2i(-8, 0));
+}
+
+void GerenciadorGrafico::diminuiJanela() {
+	window->setSize(sf::Vector2u(640, 480));
+	view.setSize(sf::Vector2f(640.0f, 480.0f));
+	window->setPosition(sf::Vector2i(360, 144));
+}
+
+sf::Vector2i GerenciadorGrafico::getCoorWindow() {
+	return window->getPosition();
+}

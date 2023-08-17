@@ -1,5 +1,6 @@
 #include "GerenciadorColisao.h"
 #include "Item.h"
+#include "Obstaculo.h"
 #include <cmath>
 
 using namespace Gerenciadores;
@@ -71,10 +72,12 @@ void GerenciadorColisao::executar() {
 						//std::cout << "Ocorre uma colisao 1.\n";
 						
 						if (ent2->getObstaculo() == true) {
-							if(i==0)
-								flag1 = jogadores[i]->colisaoMapaObs(ent2);
-							else
-								flag2 = jogadores[i]->colisaoMapaObs(ent2);
+							
+								if (i == 0)
+									flag1 = jogadores[i]->colisaoMapaObs(ent2);
+								else
+									flag2 = jogadores[i]->colisaoMapaObs(ent2);
+							
 						}
 							
 
@@ -98,11 +101,11 @@ void GerenciadorColisao::executar() {
 			ent1 = static_cast<Entidade*>(jogadores[1]);
 
 		GerenciadorGrafico *graf = GerenciadorGrafico::getGerenciadorGrafico();
-		if (ent1->getPos().x < map->getIni() + map->getLen() * 0.2)map->setColidiveis(map->getC1());
-		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.2 && ent1->getPos().x < map->getIni() + map->getLen() * 0.4) map->setColidiveis(map->getC1b());
-		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.4 && ent1->getPos().x < map->getIni() + map->getLen() * 0.6) map->setColidiveis(map->getC2());
-		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.6 && ent1->getPos().x < map->getIni() + map->getLen() * 0.8) map->setColidiveis(map->getC2b());
-		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.8 && ent1->getPos().x < map->getIni() + map->getLen()) map->setColidiveis(map->getC3());
+		if (ent1->getPos().x < map->getIni() + map->getLen() * 0.3)map->setColidiveis(map->getC1());
+		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.3 && ent1->getPos().x < map->getIni() + map->getLen() * 0.5) map->setColidiveis(map->getC1b());
+		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.5 && ent1->getPos().x < map->getIni() + map->getLen() * 0.7) map->setColidiveis(map->getC2());
+		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.7 && ent1->getPos().x < map->getIni() + map->getLen() * 0.9) map->setColidiveis(map->getC2b());
+		else if (ent1->getPos().x > map->getIni() + map->getLen() * 0.9 && ent1->getPos().x < map->getIni() + map->getLen()) map->setColidiveis(map->getC3());
 		
 
 		//map->setColidiveis(map->getC1());
@@ -134,12 +137,12 @@ void GerenciadorColisao::executar() {
 			flag2 = 0;
 			ent1 = inimigos->getLista()->getElX(i)->getInfo();
 			if (ent1->getVivo() == false) continue;
-			if ((ent1->getPos().x > graf->getCoorView().x + 500) || ent1->getPos().x < graf->getCoorView().x - 500 || ent1->getPos().y > graf->getCoorView().y + 400 || ent1->getPos().y < graf->getCoorView().y - 400) continue;
+			if ((ent1->getPos().x > graf->getCoorView().x + graf->getView()->getSize().x / 1.5) || ent1->getPos().x < graf->getCoorView().x - graf->getView()->getSize().x / 1.5 || ent1->getPos().y > graf->getCoorView().y + graf->getView()->getSize().y / 1.5 || ent1->getPos().y < graf->getCoorView().y - graf->getView()->getSize().y / 1.5) continue;
 			for (j = 0; j < map->getColidiveis()->getTam(); j++) {
 				Plataforma* hbx = map->getColidiveis()->getElX(j)->getInfo();
-				if ((hbx->getPos().x > graf->getCoorView().x + 500 && hbx->getPos().x + hbx->getTam().x > graf->getCoorView().x + 500)
-					|| (hbx->getPos().x < graf->getCoorView().x - 500 && hbx->getPos().x + hbx->getTam().x < graf->getCoorView().x - 500) 
-					|| hbx->getPos().y > graf->getCoorView().y + 400 || hbx->getPos().y < graf->getCoorView().y - 400) continue;
+				if ((hbx->getPos().x > graf->getCoorView().x + graf->getView()->getSize().x / 1.5 && hbx->getPos().x + hbx->getTam().x > graf->getCoorView().x + graf->getView()->getSize().x / 1.5)
+					|| (hbx->getPos().x < graf->getCoorView().x - graf->getView()->getSize().x / 1.5 && hbx->getPos().x + hbx->getTam().x < graf->getCoorView().x - graf->getView()->getSize().x / 1.5)
+					|| hbx->getPos().y > graf->getCoorView().y + graf->getView()->getSize().y / 1.5 || hbx->getPos().y < graf->getCoorView().y - graf->getView()->getSize().y / 1.5) continue;
 				sf::Vector2f ds = calculaColisaoPlat(ent1, hbx);
 				if (ds.x < 0.0f && ds.y < 0.0f) {
 					//std::cout << "Ocorre uma colisao 2 - Inimigo.\n";

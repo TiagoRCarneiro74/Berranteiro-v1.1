@@ -1,7 +1,7 @@
 #include "Jogador.h"
 #include "Inimigo.h"
 #include "Obstaculo.h"
-#include <windows.h>
+//#include <windows.h>
 #include <iostream>
 #include <cmath>
 
@@ -16,6 +16,7 @@ Jogador::Jogador(const int j): Personagem(100, 101, 50, 50), jogador(j){
 	maxVidas = 100;
 	pontos = 0;
 	l_arma = new Lista<Arma>();
+	itens = new Lista<string>();
 
 	if(j==1)
 	{
@@ -34,12 +35,13 @@ Jogador::Jogador(const int j): Personagem(100, 101, 50, 50), jogador(j){
 	arma_sel = 1;
 	Arma* Pistola = new Arma("pistola");
 	l_arma->incluirEl(Pistola);
-	Arma* Skorpion = new Arma("mp5");
-	l_arma->incluirEl(Skorpion);
+	//Arma* Skorpion = new Arma("mp5");
+	//l_arma->incluirEl(Skorpion);
 }
 
 Jogador::~Jogador() {
 	delete l_arma;
+	delete itens;
 }
 
 void Jogador::move() 
@@ -212,13 +214,13 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 	if (trunc(getPos().x + getTam().x) <= hbx->getPos().x + 16 && getPos().y >= hbx->getPos().y - getTam().y + 8) {
 		setPos(sf::Vector2f(hbx->getPos().x - getTam().x, getPos().y));
 		//pJogador->setVelY(-0.3f);
-		std::cout << "Colisao com a direita.\n";
+		//std::cout << "Colisao com a direita.\n";
 		setVelY(getVel().y / 1.1f);
 		flag = 1;
 	}
 	else if (getPos().x - 8 >= hbx->getPos().x + hbx->getTam().x - 16 && getPos().y >= hbx->getPos().y - getTam().y + 8) {
 		setPos(sf::Vector2f(hbx->getPos().x + hbx->getTam().x, getPos().y));
-		std::cout << "Colisao com a esquerda.\n";
+		//std::cout << "Colisao com a esquerda.\n";
 		//if (pJogador->getVel().y <= 0.6 && pJogador->getVel().y >= 0.2) pJogador->setVelY(-0.3f);
 		//else pJogador->setVelY(pJogador->getVel().y / 2.0f);
 		setVelY(getVel().y / 1.1f);
@@ -227,7 +229,7 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 
 
 	else if (trunc(getPos().y + getTam().y) + 8 >= trunc(hbx->getPos().y) && getVel().y >= 0) {
-		std::cout << "Colisao abaixo.\n";
+		//std::cout << "Colisao abaixo.\n";
 		//int py = pJogador->getPos().y / 32;
 		//py = py * 32;
 		if (getVel().y > 0) {
@@ -238,7 +240,7 @@ int Jogador::colisaoMapaObs(Entidade *hbx)
 		flag = 1;
 	}
 	else if (getPos().y >= hbx->getPos().y + hbx->getTam().y - 16) {
-		std::cout << "Colisao acima.\n";
+		//std::cout << "Colisao acima.\n";
 		setVelY(-getVel().y);
 		setPos(getPos().x, hbx->getPos().y + hbx->getTam().y);
 	}
@@ -297,7 +299,8 @@ void Jogador::atirar() {
 	Arma* x = l_arma->getElX(arma_sel)->getInfo();
 	if (t1 / (float)CLOCKS_PER_SEC - x->getTR() / (float)CLOCKS_PER_SEC > x->getRec() && x->getRecarregando() == 1) {
 		x->setDry(0);
-		x->setMagvar(x->getMag());
+		if (x->getAmmo() > x->getMag()) x->setMagvar(x->getMag());
+		else x->setMagvar(x->getAmmo());
 		x->setRecarregando(0);
 	}
 	else if (x->getRecarregando() == 1) x->setDry(1);
@@ -307,8 +310,14 @@ void Jogador::atirar() {
 		return;
 	}
 	if (t1 / (float) CLOCKS_PER_SEC - x->getClock() / (float) CLOCKS_PER_SEC < 1.0 / x->getCad()) {
-		if (virado == 0) this->setTextura(*(x->getTdir()));
-		else this->setTextura(*(x->getTesq()));
+		if (virado == 0) {
+			this->setTextura(*(x->getTdir()));
+			corpo.setTextureRect(sf::IntRect(0, 0, x->getTdir()->getSize().x, 370));
+		}
+		else {
+			this->setTextura(*(x->getTesq()));
+			corpo.setTextureRect(sf::IntRect(0, 0, x->getTesq()->getSize().x, 370));
+		}
 		return;
 	}
 	std::cout << t1 / (float) CLOCKS_PER_SEC << " - " << x->getClock() / (float) CLOCKS_PER_SEC << " = " << t1 / (float) CLOCKS_PER_SEC - x->getClock() / (float) CLOCKS_PER_SEC << "\n";
@@ -325,7 +334,7 @@ void Jogador::atirar() {
 			continue;
 		}
 		if (e != NULL) if (fabs(e->getPos().x - this->getPos().x) < min) {
-			min = e->getPos().x - this->getPos().x;
+			min = fabs(e->getPos().x - this->getPos().x);
 			e1 = e;
 		}
 		//std::cout << e->getPos().x << "\ne.y = " << e->getPos().y << "\nj.x = " << this->getPos().x << "\nj.y = " << this->getPos().y << "\n";
@@ -344,4 +353,9 @@ void Jogador::atirar() {
 	//std::cout << "ATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\nATIRAR FOI CHAMADO\n";
 
 	static_cast <Inimigo*> (e)->setVidas(static_cast <Inimigo*> (e)->getVidas() - l_arma->getElX(arma_sel)->getInfo()->getDano());
+	if (static_cast <Entidade*> (e)->getVivo() == false) {
+		pontos += 50;
+		std::cout << "+50 pts.\n";
+	}
+	else std::cout << "Nao matou.\n";
 }

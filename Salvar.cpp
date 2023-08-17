@@ -4,7 +4,7 @@
 #include "Salvar.h"
 #include "Textbox.h"
 #include "Jogador.h"
-#include <Windows.h>
+//#include <Windows.h>
 #include <stdio.h>
 #include <string.h>
 using namespace std;
@@ -24,6 +24,18 @@ Salvar::~Salvar() {}
 
 void Salvar::atualiza() {
 	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
+	int tamx = graf->getWindow()->getSize().x;
+	int tamy = graf->getWindow()->getSize().y;
+	if (tamx == 1360) {
+		corpo.setScale(1.45f, 1.45f);
+		setPos(448, 0.66666 * tamy);
+		corpo.setPosition(448, 0.66666 * tamy);
+	}
+	else {
+		corpo.setScale(1, 1);
+		setPos(0.25 * tamx, 0.66666 * tamy);
+		corpo.setPosition(0.25 * tamx, 0.66666 * tamy);
+	}
 	if (sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x >= getPos().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 >= getPos().y && sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x <= getPos().x + getTam().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 <= getPos().y + getTam().y) {
 		selecionada = true;
 		sf::Texture tex;
@@ -66,8 +78,18 @@ void Salvar::executar() {
 	Textbox* pontos2 = new Textbox(24, sf::Color::White, false);
 	pontos1->setText("Sua pontuacao e: ");
 	char proxy[5];
-	if (pMenu->getFase2()) pontos2->setText(_itoa(pMenu->getFase2()->getJogador1()->getPontos(), proxy, 10));
-	else if (pMenu->getFase1()) pontos2->setText(_itoa(pMenu->getFase1()->getJogador1()->getPontos(), proxy, 10));
+	if (pMenu->getFase2()) {
+		string s = to_string(pMenu->getFase2()->getJogador1()->getPontos());
+		pontos2->setText(s);
+	}
+	else if (pMenu->getFase1()) {
+		string s = to_string(pMenu->getFase1()->getJogador1()->getPontos());
+		pontos2->setText(s);
+	}
+	else if (pMenu->getFase3()) {
+		string s = to_string(pMenu->getFase3()->getJogador1()->getPontos());
+		pontos2->setText(s);
+	}
 	else pontos2->setText("0");
 	pontos1->setFont(f);
 	pontos2->setFont(f);
@@ -129,8 +151,9 @@ void Salvar::executar() {
 	for (int a = 0; a < pontos.size(); a++) {
 		printf("%d nomes nos colocados.\n", a + 1);
 		Textbox* j = new Textbox(24, sf::Color::White, false);
-		char recep[5];
-		_itoa(pontos[a], recep, 10);
+		//char recep[5];
+		//_itoa(pontos[a], recep, 10);
+		string recep = to_string(pontos[a]);
 		j->setFont(f);
 		j->setPosition(sf::Vector2f(330, 100 + a*50));
 		j->setText(nomes[a]);
@@ -171,7 +194,7 @@ void Salvar::executar() {
 			p->draw(graf->getWindow());
 		}
 		graf->getWindow()->display();
-		Sleep(50);
+		//Sleep(50);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 		std::string nome = t->getText();
@@ -191,7 +214,9 @@ void Salvar::executar() {
 		else if (pMenu->getFase2()) pon = pMenu->getFase2()->getJogador1()->getPontos();
 		printf("O nome digitado foi %s.\n", s);
 		char p[5];
-		_itoa(pon, p, 10);
+		string s0 = to_string(pon);
+		//_itoa(pon, p, 10);
+		for (int i = 0; i < 5; i++) p[i] = s0[i];
 		fputs(p, fp);
 		fputc('\n', fp);
 	}

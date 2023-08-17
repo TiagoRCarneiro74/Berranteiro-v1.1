@@ -68,6 +68,7 @@ namespace Listas
       void removeEl(Elemento<TIPO>* elemento);
       Elemento<TIPO>* getPrimeiro();
       Elemento<TIPO>* getElX(int x);
+      void removeElX(int x);
       int getTam();
 
       
@@ -121,6 +122,7 @@ namespace Listas
       else
       {
         ultimo->setProximo(aux);
+        aux->setAnterior(ultimo);
         ultimo = ultimo->getProximo();
         cont++;
       }
@@ -133,14 +135,25 @@ namespace Listas
     Lista<TIPO>::Elemento<TIPO>  *anterior, *proximo;
     anterior = elemento->getAnterior();
     proximo = elemento->getProximo();
-    anterior->setProximo(proximo);
-    proximo->setAnterior(anterior);
+    if (anterior) anterior->setProximo(proximo);
+    else primeiro = elemento->getProximo();
+    if (proximo) proximo->setAnterior(anterior);
+    else ultimo = elemento->getAnterior();
     delete elemento;
     cont--;
+
+    if (cont == 0) {
+        primeiro = NULL;
+        ultimo = NULL;
+    }
+
+    else if (cont == 1) {
+        ultimo = primeiro;
+    }
   }
 
   template<class TIPO>
-  Lista<TIPO>::Elemento<TIPO>* Lista<TIPO>::getPrimeiro()
+  typename Lista<TIPO>::template Elemento<TIPO>* Lista<TIPO>::getPrimeiro()
   {
     return primeiro;
   }
@@ -149,7 +162,7 @@ namespace Listas
   int Lista<TIPO>::getTam() { return cont; }
 
   template <class TIPO>
-  Lista<TIPO>::Elemento<TIPO>* Lista<TIPO>::getElX(int x) 
+  typename Lista<TIPO>::template Elemento<TIPO>* Lista<TIPO>::getElX(int x) 
   {
       int c = 1;
       Lista<TIPO>::Elemento<TIPO>* it = getPrimeiro();
@@ -159,5 +172,15 @@ namespace Listas
       }
       return it;
   }
-
+  template <class TIPO>
+  void Lista<TIPO>::removeElX(int x) {
+      int c = 1;
+      Lista<TIPO>::Elemento<TIPO>* it = getPrimeiro();
+      while (c < x) {
+          it = it->getProximo();
+          c++;
+      }
+      removeEl(it);
+  }
 }
+

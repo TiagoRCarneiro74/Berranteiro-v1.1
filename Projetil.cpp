@@ -1,4 +1,6 @@
 #include "Projetil.h"
+#include "Curupira.h"
+#include <cmath>
 
 using namespace Entidades;
 
@@ -9,7 +11,7 @@ Entidade(0,sf::Vector2f(x, y), 0)
 	atirador = NULL;
     direita = false;
 	ativado = false;
-	alcance = 650;
+	alcance = gerente->getWindow()->getSize().x + 200;
 	distanciaPercorrida = 0;
 	setAtacar(false);
     corpo.setTextureRect(sf::IntRect(0,0,62,79));
@@ -37,24 +39,32 @@ void Projetil::move()
             vel.x = -6;
 
 		distanciaPercorrida = distanciaPercorrida + 6;
+		vel.y = sin(clock.getElapsedTime().asSeconds() * 8);
 		
-		if (distanciaPercorrida < alcance) { setVelY(0); }
+		//if (distanciaPercorrida < alcance) { setVelY(0); }
 
         pos.x = pos.x + vel.x;
-        pos.y = pos.y + vel.y*2;
+        pos.y = pos.y + vel.y*3;
 		corpo.setPosition(pos.x, pos.y);
 
 	}
 	else
 	{
-		setPos(atirador->getPos());
+		if (atirador->getVirado() == 0) {
+			if (atirador->getAtacar() == 1) setPos(sf::Vector2f(atirador->getPos().x + atirador->getTam().x, atirador->getPos().y + 40));
+			else setPos(sf::Vector2f(atirador->getPos().x + atirador->getTam().x + this->getTam().x, atirador->getPos().y + 40));
+		}
+		else {
+			if (atirador->getAtacar() == 1) setPos(sf::Vector2f(atirador->getPos().x, atirador->getPos().y + 40));
+			else setPos(sf::Vector2f(atirador->getPos().x - this->getTam().x, atirador->getPos().y + 40));
+		}
 	}
 
-	if((distanciaPercorrida > alcance && vel.y == 0) && (pos != atirador->getPos()))
+	if((distanciaPercorrida > alcance) && (pos != atirador->getPos()))
 	{
 		distanciaPercorrida = 0;
 		ativado = false;
-		setPos(atirador->getPos());
+		setPos(sf::Vector2f(atirador->getPos().x, atirador->getPos().y + 40));
 	}
 }
 

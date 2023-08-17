@@ -9,6 +9,7 @@ GerenciadorEvento::GerenciadorEvento() {
 	pJogador1 = NULL;
 	pJogador2 = NULL;
 	tecla2 = false;
+	drop = 0;
 	//pMenu = NULL;
 }
 
@@ -53,6 +54,7 @@ void GerenciadorEvento::verifTeclaPressionada(sf::Keyboard::Key tecla)
 		if (tecla == sf::Keyboard::V) {
 			pJogador1->setArmaSel(pJogador1->getArmaSel() + 1);
 			int x = pJogador1->getl_arma()->getTam();
+			int as = pJogador1->getArmaSel();
 			if (pJogador1->getArmaSel() > x) pJogador1->setArmaSel(pJogador1->getArmaSel() - x);
 			s.setBuffer(*(pJogador1->getl_arma()->getElX(pJogador1->getArmaSel())->getInfo()->getSomEquip()));
 			s.play();
@@ -63,6 +65,10 @@ void GerenciadorEvento::verifTeclaPressionada(sf::Keyboard::Key tecla)
 		if (tecla == sf::Keyboard::Space && pJogador1->getVel().y <= 0.1 && pJogador1->getVel().y >= -0.1) {
 			pJogador1->pular();
 		}
+		if (tecla == sf::Keyboard::O) {
+			drop = 1;
+		}
+		else drop = 0;
 	}
 
 	//------JOGADOR 2------
@@ -91,8 +97,9 @@ void GerenciadorEvento::verifTeclaPressionada(sf::Keyboard::Key tecla)
 	if (tecla == sf::Keyboard::Escape) {
 		pJogador1->setVidas(0);
 		pJogador2->setVidas(0);
+		//pJogador1->setVivo(false);
+		//pJogador2->setVivo(false);
 	}
-	
 }
 
 void GerenciadorEvento::verifTeclaSolta(sf::Keyboard::Key tecla) {
@@ -117,15 +124,37 @@ void GerenciadorEvento::verifTeclaSolta(sf::Keyboard::Key tecla) {
 			pJogador2->setAtacar(false);
 		}
 	}
+
+	verifImpessoais(tecla);
 }
 
 void GerenciadorEvento::executar() {
 	sf::Event evento;
 	while (pGraf->getWindow()->pollEvent(evento)) {
+		if (pJogador1 == NULL && pJogador2 == NULL) {
+			verifImpessoais(evento.key.code);
+			continue;
+		}
+		
 		if (evento.type == sf::Event::KeyPressed) verifTeclaPressionada(evento.key.code);
 		else if (evento.type == sf::Event::KeyReleased) verifTeclaSolta(evento.key.code);
 		else if (evento.type == sf::Event::Closed) pGraf->fecharJanela();
+	
+		
 	}
+	//if (pGraf->getWindow() == NULL) std::cout << "Nao ha janela.\n";
+	//else std::cout << "evento = NULL";
+}
+
+void GerenciadorEvento::verifImpessoais(sf::Keyboard::Key tecla) {
+	if (tecla == sf::Keyboard::F11) {
+		pGraf->maximizaJanela();
+	}
+
+	if (tecla == sf::Keyboard::F9) {
+		pGraf->diminuiJanela();
+	}
+
 }
 
 //void GerenciadorEvento::setMenu(Menu* m) { pMenu = m; }

@@ -58,7 +58,7 @@ Arma::Arma(string n) {
 		hitscan = 1;
 		mag = 12;
 		magvar = 12;
-		ammo = 240;
+		ammo = 60;
 
 		Tesq.loadFromFile("Midia/Imagens/Pistola-E.png");
 		Tdir.loadFromFile("Midia/Imagens/Pistola-D.png");
@@ -120,7 +120,8 @@ void Arma::recarregar() {
 void Arma::verifReload() {
 	clock_t at = clock();
 	if (at / (float)CLOCKS_PER_SEC - tr / (float)CLOCKS_PER_SEC >= rec && recarregando == 1) {
-		magvar = mag;
+		if (ammo > mag) magvar = mag;
+		else magvar = ammo;
 		dry = 0;
 		recarregando = 0;
 	}

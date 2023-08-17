@@ -41,8 +41,15 @@ void Resumir::executar()
 		pMenu->getFase1()->getMusica()->play();
 	}
 
+	else if (pMenu->getFase3()) {
+		j2 = pMenu->getFase3()->getJogador2();
+		j1 = pMenu->getFase3()->getJogador1();
+	}
+
 	j1->setVidas(50);
 	j2->setVidas(50);
+	//j1->setVivo(true);
+	//j2->setVivo(true);
 
 	if(j1->getSegue()==1)
 	{
@@ -60,6 +67,18 @@ void Resumir::executar()
 
 void Resumir::atualiza() {
 	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
+	int tamx = graf->getWindow()->getSize().x;
+	int tamy = graf->getWindow()->getSize().y;
+	if (tamx == 1360) {
+		corpo.setScale(1.45f, 1.45f);
+		setPos(448, 0.16666 * tamy);
+		corpo.setPosition(448, 0.16666 * tamy);
+	}
+	else {
+		corpo.setScale(1, 1);
+		setPos(0.25 * tamx, 0.16666 * tamy);
+		corpo.setPosition(0.25 * tamx, 0.16666 * tamy);
+	}
 	cout << "Posicao do mouse:\npos.x = " << sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x << "\npos.y = " << sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y << endl;
 	if (sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x >= getPos().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 >= getPos().y && sf::Mouse::getPosition().x - graf->getWindow()->getPosition().x <= getPos().x + getTam().x && sf::Mouse::getPosition().y - graf->getWindow()->getPosition().y - 30 <= getPos().y + getTam().y) {
 		cout << "Mouse na opcao Resumir.\n";

@@ -8,13 +8,21 @@ Medpack::Medpack(Jogador* jo, float sx, float sy) : Item(jo, sx, sy) {
 	corpo.setTexture(textura);
 	corpo.setPosition(sx, sy);
 	//corpo.setScale(0.4f, 0.4f);
-	nome = "coracao";
+	nome = "medpack";
+	valor = 10;
 }
 
 Medpack::~Medpack() {}
 
 void Medpack::pegar() {
-	if (j->getVidas() < j->getMaxVidas()) j->setVidas(j->getVidas() + 10);
+	if (j->getVidas() < j->getMaxVidas()) j->setVidas(j->getVidas() + valor);
 	if (j->getVidas() > j->getMaxVidas()) j->setVidas(j->getMaxVidas());
 	setVidas(0);
+	string x;
+	x = to_string(valor);
+	f->getInterface()->setInstrucao("+"+x+" HP.");
+}
+
+void Medpack::setValor(int f0) {
+	valor = f0;
 }

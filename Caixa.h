@@ -8,6 +8,7 @@
 #include "MedPack.h"
 #include "Fase.h"
 #include <time.h>
+#include <string>
 using namespace Itens;
 using namespace Fases;
 
@@ -17,7 +18,8 @@ class Caixa : public Item {
 private:
 	sf::Sound s;
 	sf::SoundBuffer sb;
-	Item* i1, * i2;
+	//Item* i1, * i2;
+	string i1, i2;
 	Fase* f;
 
 public:
@@ -25,9 +27,9 @@ public:
 	~Caixa();
 	void pegar();
 	void findar();
-	void setI1(Item* i);
-	void setI2(Item* i);
-	Item* getI1();
-	Item* getI2();
+	void setI1(string s);
+	void setI2(string s);
+	string getI1();
+	string getI2();
 	void setFase(Fase* k);
 };

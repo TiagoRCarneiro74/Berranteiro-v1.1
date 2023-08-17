@@ -9,10 +9,11 @@
 #include "Espinho.h"
 #include "Pedra.h"
 #include "Trepadeira.h"
-#include "Curupira.h"
+//#include "Curupira.h"
 #include "Obstaculo.h"
 #include "Interface.h"
-#include "Soldado.h"
+#include "Item.h"
+//#include "Soldado.h"
 using namespace Entidades;
 using namespace Personagens;
 using namespace Gerenciadores;
@@ -33,7 +34,7 @@ namespace Fases
             Jogador* j2;
             Mapa* mapa2;
             Interface* interf;
-            sf::Clock clock;
+            sf::Clock clock, dropclock;
             //Lista<Obstaculo>* obs;
 
         public:
@@ -58,10 +59,12 @@ namespace Fases
             void geraArara(float x, float y);
             void geraPedra(float x, float y);
             void geraEspinho(float x, float y, int tam);
-            void geraItem(float x, float y, string nome);
+            Item* geraItem(float x, float y, string nome);
             void geraSoldado(float x, float y, int s);
             GerenciadorEvento* getEvent();
             void moveLista();
+            Interface* getInterface();
+            void jogador_soltarArma();
     };
 
 }

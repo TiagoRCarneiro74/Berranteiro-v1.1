@@ -25,6 +25,9 @@ namespace Gerenciadores
 		sf::View* getView();
 		void imprimeRet(sf::RectangleShape ret);
 		void imprimeTexto(sf::Text tex);
+		void maximizaJanela();
+		void diminuiJanela();
+		sf::Vector2i getCoorWindow();
 	};
 
 }

@@ -2,11 +2,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 #include "Interface.h"
+#include <stdlib.h>
 #include <iostream>
 using namespace std;
 
 Interface::Interface() : Ente(sf::Vector2f(0.0f, 0.0f)) {
-	sf::Vector2f pos = sf::Vector2f(gerente->getCoorView().x - 320, gerente->getCoorView().y - 240);
+	sf::Vector2f pos = sf::Vector2f(gerente->getCoorView().x - gerente->getView()->getSize().x / 2, gerente->getCoorView().y - gerente->getView()->getSize().y / 2);
 
 	TRosto.loadFromFile("Midia/Imagens/Rosto.png");
 	rosto.setTextureRect(sf::IntRect(0, 0, 256, 256));
@@ -31,13 +32,17 @@ Interface::Interface() : Ente(sf::Vector2f(0.0f, 0.0f)) {
 
 	mag = new Textbox();
 	ammo = new Textbox();
+	instrucao = new Textbox();
 	f = new sf::Font();
 	f->loadFromFile("Midia/Imagens/FSEX300.ttf");
 	mag->setFont(f);
 	ammo->setFont(f);
+	instrucao->setFont(f);
 
 	mag->setText("CAR.: 00");
 	ammo->setText("TOTAL: 00");
+	instrucao->setText("");
+	tref = 0;
 
 	//Arma* x = j->getl_arma()->getElX(j->getArmaSel())->getInfo();
 	//mag->setText("CAR.: "+to_string(x->getMagvar()));
@@ -48,18 +53,21 @@ Interface::~Interface() {
 	delete f;
 	delete ammo;
 	delete mag;
+	delete instrucao;
 }
 
 void Interface::alteraAmmo(int x) {
-	char buf[5];
-	_itoa(x, buf, 10);
-	ammo->setText(buf);
+	//char buf[5];
+	//itoa(x, buf, 10);
+	string s = to_string(x);
+	ammo->setText(s);
 }
 
 void Interface::alteraMag(int x) {
-	char buf[5];
-	_itoa(x, buf, 10);
-	mag->setText(buf);
+	//char buf[5];
+	//_itoa(x, buf, 10);
+	string s = to_string(x);
+	mag->setText(s);
 }
 
 void Interface::imprimir() {
@@ -69,6 +77,12 @@ void Interface::imprimir() {
 	mag->draw(gerente->getWindow());
 	gerente->imprimeRet(HBar);
 	gerente->desenhaElemento(frame);
+	instrucao->draw(gerente->getWindow());
+}
+
+void Interface::setInstrucao(string s) {
+	instrucao->setText("> " + s);
+	tref = clock.getElapsedTime().asSeconds();
 }
 
 void Interface::atualiza() {
@@ -105,13 +119,19 @@ void Interface::atualiza() {
 
 	//III. Posições
 
-	sf::Vector2f pos = sf::Vector2f(gerente->getCoorView().x - 320, gerente->getCoorView().y - 240);
+	sf::Vector2f pos = sf::Vector2f(gerente->getCoorView().x - gerente->getView()->getSize().x / 2, gerente->getCoorView().y - gerente->getView()->getSize().y / 2);
 	rosto.setPosition(pos);
 	cor.setPosition(sf::Vector2f(pos.x, pos.y + 68));
 	ammo->setPosition(sf::Vector2f(pos.x + 68, pos.y));
 	mag->setPosition(sf::Vector2f(pos.x + 68, pos.y + 32));
 	HBar.setPosition(pos.x + 36, pos.y + 84);
 	frame.setPosition(pos.x + 36, pos.y + 68);
+	instrucao->setPosition(sf::Vector2f(pos.x + 250, pos.y));
+
+
+	//IV. Instrução
+	if (clock.getElapsedTime().asSeconds() - tref > 3) instrucao->setText("");
+
 }
 
 void Interface::teste() {

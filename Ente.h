@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "GerenciadorGrafico.h"
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 #include <string>
 using namespace std;
 using namespace Gerenciadores;

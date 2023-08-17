@@ -6,6 +6,7 @@ Obstaculo::Obstaculo(float x, float y) : Entidade(3, sf::Vector2f(x, y), 0) {
 	danoso = false;
 	atacar = danoso;
 	obstaculo = true;
+	colidivel = true;
 }
 
 Obstaculo::~Obstaculo() {}

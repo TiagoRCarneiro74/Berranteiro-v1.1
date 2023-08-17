@@ -2,9 +2,14 @@
 #include "Fase2.h"
 #include "Pedra.h"
 #include "Espinho.h"
+#include "Item.h"
+#include "Caixa.h"
+#include "Chave.h"
+#include "Porta.h"
 #include <iostream>
 
 using namespace Fases;
+using namespace Itens;
 
 Fase1::Fase1(GerenciadorColisao *c, GerenciadorGrafico *g, GerenciadorEvento *e):
 Fase(c, g, e)
@@ -104,13 +109,13 @@ void Fase1::geraInimigos()
     int contador = 0;
     float x = 300;
     float y = 100;
-    geraOnca(660, 376);
-    geraSoldado(1000, 120, 1);
+    //geraOnca(660, 376);
+    geraSoldado(19 * 32, 48, 2);
     geraOnca(3224, 1462);
     geraArara(2384, 250);
     geraArara(1312, 150);
     geraArara(2936, 568);
-    geraSoldado(3456, 662, 2);
+    geraSoldado(3456, 662, 1);
 
 
     verif = rand() % 4;
@@ -184,13 +189,22 @@ void Fase1::geraTrepadeira(float x, float y)
 }
 
 void Fase1::geraItens() {
+    Item* i = NULL;
     geraItem(2368, 300, "skorpion");
-    geraItem(2300, 300, "caixa");
+    i = geraItem(2300, 300, "caixa");
+    static_cast <Caixa*> (i)->setI1("skorpion");
+    static_cast <Caixa*> (i)->setI2("skorpion");
     geraItem(1000, 200, "med");
-    geraItem(920, 180, "caixa");
+    i = geraItem(920, 180, "caixa");
+    //i = geraItem(900, 150, "chave");
+    //static_cast <Chave*> (i)->setString("3A1");
+    static_cast <Caixa*> (i)->setI1("chave-A1");
+    static_cast <Caixa*> (i)->setI2("pistola");
     geraItem(1100, 200, "med");
     geraItem(3300, 300, "med");
     geraItem(4330, 820, "med");
+    i = geraItem(300, 100, "porta");
+    static_cast <Porta*> (i)->setString("A1");
 }
 
 sf::Music* Fase1::getMusica() { return f1; }

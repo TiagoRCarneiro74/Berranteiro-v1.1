@@ -21,6 +21,19 @@ void Opcao::atualiza() {
 		selecionada = true;
 	}
 	else selecionada = false;*/
+	GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
+	int tamx = graf->getWindow()->getSize().x;
+	int tamy = graf->getWindow()->getSize().y;
+	if (tamx == 1360) {
+		corpo.setScale(1.45f, 1.45f);
+		setPos(260, 0);
+		corpo.setPosition(260, 0);
+	}
+	else {
+		corpo.setScale(1, 1);
+		setPos(30, 0);
+		corpo.setPosition(30, 0);
+	}
 }
 
 void Opcao::executar() {}

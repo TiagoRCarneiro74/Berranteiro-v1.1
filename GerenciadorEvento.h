@@ -16,6 +16,7 @@ namespace Gerenciadores
 		GerenciadorEvento();
 		static GerenciadorEvento* pEvento;
 		sf::Sound s;
+		bool drop;
 		//Menu* pMenu;
 
 	public:
@@ -27,6 +28,8 @@ namespace Gerenciadores
 		void verifTeclaPressionada(sf::Keyboard::Key tecla);
 		void verifTeclaSolta(sf::Keyboard::Key tecla);
 		void executar();
+		void verifImpessoais(sf::Keyboard::Key tecla);
+		bool getDrop() { return drop; }
 		//void setMenu(Menu* m);
 	};
 

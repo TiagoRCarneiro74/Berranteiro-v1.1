@@ -202,6 +202,7 @@ Curupira* Fase2::geraCurupira(float x, float y)
 {
     Curupira *inimigo;
     inimigo = new Curupira(j1, j2, x, y);
+    inimigo->setFase(this);
 
     inimigos->add(static_cast<Entidade*>(inimigo));
     lista->add(static_cast<Entidade*>(inimigo));

@@ -13,9 +13,11 @@ private:
 	sf::Sprite cor, frame;
 	sf::RectangleShape HBar;
 	sf::Texture TRosto, CorCheio, TFrame;
-	Textbox *mag, *ammo;
+	Textbox *mag, *ammo, *instrucao;
 	sf::Font* f;
 	Jogador* j;
+	sf::Clock clock;
+	float tref;
 
 public:
 	Interface();
@@ -26,4 +28,5 @@ public:
 	void atualiza();
 	void setJogador(Jogador* jo) { j = jo; }
 	void teste();
+	void setInstrucao(string s);
 };

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
-#include <windows.h>
+//#include <windows.h>
 using namespace std;
 
 Menu::Menu(): titulo(sf::Vector2f(30.0f, 0.0f)), carrega(sf::Vector2f(1000.0f, 1000.0f)), fundo(sf::Vector2f(0.0f, 0.0f)) {
@@ -21,6 +21,7 @@ Menu::Menu(): titulo(sf::Vector2f(30.0f, 0.0f)), carrega(sf::Vector2f(1000.0f, 1
 	sair = NULL;
 	f1 = NULL;
 	f2 = NULL;
+	pEvent = NULL;
 	titulo.getCorpo().setTextureRect(sf::IntRect(0, 0, 578, 79));
 	titulo.setTextura("Midia/Imagens/Titulo.png");
 	titulo.getCorpo().setTextureRect(sf::IntRect(0, 0, 578, 79));
@@ -45,11 +46,16 @@ void Menu::executar() {
 	resumir->getCorpo().setPosition(800, 80);
 	//FILE* fp = fopen("Ranking.txt", "r+");
 	while (graf->verifJanelaAberta()) {
+		pEvent->executar();
+		int tam = graf->getWindow()->getSize().x;
+		if (tam == 1360) graf->setView(sf::Vector2f(680.0f, 350.0f));
+		else graf->setView(sf::Vector2f(320.0f, 240.0f));
 		resumir->atualiza();
 		bfase1->atualiza();
 		bfase2->atualiza();
 		salvar->atualiza();
 		sair->atualiza();
+		titulo.atualiza();
 		if (resumir->getSelecionada() == true && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			if (getFase()) {
 				resumir->executar();
@@ -84,7 +90,7 @@ void Menu::executar() {
 			sair->executar();
 		}
 		GerenciadorGrafico* graf = GerenciadorGrafico::getGerenciadorGrafico();
-		graf->setView(sf::Vector2f(salvar->getPos().x + 160, bfase2->getPos().y));
+		//graf->setView(sf::Vector2f(salvar->getPos().x + 160, bfase2->getPos().y));
 		//printf("COOREDENADAS DA VIEW: %f, %f.\n", graf->getCoorView().x, graf->getCoorView().y);
 		//printf("COOREDENADAS DE BFASE2: %f, %f.\n\n\n\n\n\n\n\n\n\n\n\n\n\n", bfase2->getCorpo().getPosition().x, bfase2->getCorpo().getPosition().y);
 		//Sleep(5000);
@@ -118,6 +124,7 @@ Fase* Menu::getFase()
 {
 	if (f1) return f1;
 	else if (f2) return f2;
+	else if (f3) return f3;
 	else
 	{
 		f1 = NULL;
